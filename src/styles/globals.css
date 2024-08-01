@@ -18,16 +18,37 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  @layer utilities {
+    .text-balance {
+      text-wrap: balance;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px; /* Width of the scrollbar */
+      height: 8px; /* Height of the scrollbar */
+    }
+
+    ::-webkit-scrollbar-track {
+      @apply bg-gray-200; /* Background color of the scrollbar track */
+    }
+
+    ::-webkit-scrollbar-thumb {
+      @apply bg-[#9f9d9d] rounded-full; /* Scrollbar thumb styling */
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      @apply bg-[#807e7e]; /* Hover effect on the scrollbar thumb */
+    }
+  }
+}
+
+.bg-gradient {
+  background: linear-gradient(50deg, #141414 50%, #1e1e1e 85%, #282828 100%);
 }

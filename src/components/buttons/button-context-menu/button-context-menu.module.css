@@ -1,0 +1,66 @@
+.menuContainer {
+  position: relative;
+}
+
+.menuButton {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  background-color: #333;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.menuButton:hover .dot {
+  background-color: #f7b267; /* Change this color to your desired hover color */
+}
+
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  top: 14px;
+  right: 0;
+  background-color: #1b1b1b;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  padding: 0.5rem;
+  width: 8rem;
+}
+
+.dropdownItem {
+  padding: 0.6rem 1.2rem 0.6rem 1.2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 0.6rem;
+  justify-content: normal;
+}
+
+.iconItem {
+  margin-right: 0.8rem;
+}
+
+.dropdownItem:hover {
+  background-color: #2d3236;
+}
+
+.menuOpen .dropdownMenu {
+  display: block;
+}
