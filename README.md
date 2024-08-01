@@ -1,14 +1,10 @@
-# My Next.js Project
+# Duck Moolah (Expense Tracker Stuff)
 
 <p align="center">
   <img width="200" alt="Project Logo" src="https://github.com/user-attachments/assets/9a71a0dd-5fa0-4710-8e86-419675b068da">
 </p>
 
-<h2 align="center">My Next.js Project</h2>
-
-<p align="center">
-  <b>Building a modern web application with Next.js</b>
-</p>
+<h2 align="center">Duck Moolah Project</h2>
 
 ## Table of Contents
 
