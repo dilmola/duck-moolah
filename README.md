@@ -1,40 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# My Next.js Project
+
+<p align="center">
+  <img width="200" alt="Project Logo" src="https://github.com/user-attachments/assets/9a71a0dd-5fa0-4710-8e86-419675b068da">
+</p>
+
+<h2 align="center">My Next.js Project</h2>
+
+<p align="center">
+  <b>Building a modern web application with Next.js</b>
+</p>
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Running the Project](#running-the-project)
+- [License](#license)
+
+## Introduction
+
+This is a sample project to demonstrate the use of [Next.js](https://nextjs.org/), a React framework with hybrid static & server rendering, and route pre-fetching.
+
+## Features
+
+- Server-side rendering
+- Static site generation
+- API routes
+- Dynamic routing
+- CSS-in-JS support
 
 ## Getting Started
 
-First, run the development server:
+### Installation
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+First, clone the repository:
+
+```sh
+git clone https://github.com/your-username/your-nextjs-project.git
+cd your-nextjs-project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, install the dependencies:
+```sh
+npm install
+# or
+yarn install
+```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Running the Project
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Open http://localhost:3000 with your browser to see the result.
+To build the project for production:
+```sh
+npm run build
+# or
+yarn build
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+To start the production server:
+```sh
+npm start
+# or
+yarn start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## License
+Distributed under the MIT License. See LICENSE for more information.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<p align="center">
+  Made with 🏋️‍♂️ by <a href="https://github.com/dilmola">Aidil Maula</a>
+</p>
