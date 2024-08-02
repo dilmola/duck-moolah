@@ -45,7 +45,7 @@ const ButtonView = ({ setTypeOfView }) => {
       </button>
       {showDropdown && (
         <div className="absolute top-full right-0 w-max bg-[#1b1b1b] rounded-lg shadow-md">
-          <div className="p-2 flex flex-col">
+          <div className="p-2 flex flex-col font-thin">
             {nameView.map((filterOption) => (
               <button
                 key={filterOption.data}

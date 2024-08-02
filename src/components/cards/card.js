@@ -1,7 +1,13 @@
 import ButtonContextMenu from "@/components/buttons/button-context-menu/button-context-menu";
 import styles from "./card.module.css";
 
-const Card = ({ typeAmount, nameOfBil, dueDateOfBill, amountOfBill }) => {
+const Card = ({
+  typeAmount,
+  nameOfBil,
+  dueDateOfBill,
+  amountOfBill,
+  statusOfBill,
+}) => {
   const dotStyle =
     typeAmount === "Fixed amount" ? styles.orangeDot : styles.yellowDot;
 
@@ -14,7 +20,7 @@ const Card = ({ typeAmount, nameOfBil, dueDateOfBill, amountOfBill }) => {
               <div
                 className={`w-2 h-2 rounded-full ${dotStyle} ${styles.pulse} mr-2`}
               ></div>
-              <div className="font-thin text-white/60">{typeAmount}</div>
+              <div className="font-thin text-white/60">{typeAmount} bill</div>
             </div>
             <ButtonContextMenu />
           </div>
@@ -27,12 +33,19 @@ const Card = ({ typeAmount, nameOfBil, dueDateOfBill, amountOfBill }) => {
               </a>
               <a>
                 <span className="font-thin text-white/60">Bill amount: </span>
-                {amountOfBill}
+                RM {amountOfBill}
               </a>
             </div>
             <div>
-              <button className="bg-[#A7C957]/20 border border-[#A7C957] text-[#A7C957] px-4 rounded-lg">
-                Paid
+              <button
+                className={`px-4 rounded-lg ${
+                  statusOfBill === "paid"
+                    ? "bg-[#A7C957]/20 border border-[#A7C957] text-[#A7C957]"
+                    : ""
+                }`}
+                disabled={statusOfBill === "paid"}
+              >
+                {statusOfBill === "paid" ? "Paid" : statusOfBill}
               </button>
             </div>
           </div>

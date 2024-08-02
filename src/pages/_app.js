@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
       <ThemeProvider enableSystem={false} defaultTheme="light">
         <ViewProvider>
           <Head>
-            <title>Bill List</title>
+            <title>Duck Moolah</title>
           </Head>
           <Component {...pageProps} />
         </ViewProvider>

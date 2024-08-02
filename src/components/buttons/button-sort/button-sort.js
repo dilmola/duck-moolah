@@ -31,7 +31,7 @@ const ButtonSort = () => {
       {showDropdown && (
         <div
           className="absolute top-full right-0 bg-[#1b1b1b] rounded-lg shadow-md"
-          onClick={(e) => e.stopPropagation()} // Stop event propagation here
+          onClick={(e) => e.stopPropagation()}
         >
           <FilterCard />
         </div>

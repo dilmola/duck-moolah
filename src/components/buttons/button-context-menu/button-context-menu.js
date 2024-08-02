@@ -41,14 +41,12 @@ const ButtonContextMenu = () => {
   }, [handleClickOutside]);
 
   const handleDeleteClick = (event) => {
-    event.stopPropagation(); // Prevent the click event from propagating to the document
+    event.stopPropagation(); 
     setShowDeleteAlert(true);
   };
 
   const handleDeleteConfirm = () => {
-    // Proceed with the delete action
     console.log("Item deleted");
-    // Implement your delete logic here
     setShowDeleteAlert(false);
     setMenuOpen(false);
   };
@@ -67,7 +65,7 @@ const ButtonContextMenu = () => {
         <div className={styles.dot}></div>
       </div>
       {menuOpen && (
-        <div className={styles.dropdownMenu}>
+        <div className={`${styles.dropdownMenu} font-thin`}>
           <div className={`${styles.dropdownItem} text-[#A7C957]`}>
             <Image
               src={paidIcon.src}

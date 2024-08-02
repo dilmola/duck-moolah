@@ -22,9 +22,9 @@ const FilterCard = () => {
   const currentYear = new Date().getFullYear();
   const years = Array.from(
     { length: currentYear - 2000 + 1 },
-    (val, index) => 2000 + index
+    (_, index) => currentYear - index
   ).map(String);
-  const months = Array.from(new Array(12), (val, index) =>
+  const months = Array.from(new Array(12), (_, index) =>
     (index + 1).toString()
   );
 

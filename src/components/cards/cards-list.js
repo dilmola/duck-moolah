@@ -8,16 +8,14 @@ import { SkeletonLoader } from "@/components/loader/loader-skeleton";
 const CardsList = ({ cards }) => {
   const { typeOfView } = useContext(ViewContext);
 
-  // Optional: Manage local loading state if needed
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading state if you fetch data or do additional processing
     const timer = setTimeout(() => {
-      setIsLoading(false); // Set to false after simulating loading
-    }, 1000); // Adjust the timeout as needed
+      setIsLoading(false);
+    }, 100);
 
-    return () => clearTimeout(timer); // Cleanup timeout on unmount
+    return () => clearTimeout(timer);
   }, []);
 
   if (isLoading) {
@@ -31,10 +29,11 @@ const CardsList = ({ cards }) => {
           {cards.map((card, index) => (
             <Card
               key={index}
-              typeAmount={card.typeAmount}
-              nameOfBil={card.nameOfBil}
-              dueDateOfBill={card.dueDateOfBill}
-              amountOfBill={card.amountOfBill}
+              typeAmount={card.type_of_bill}
+              nameOfBil={card.name_of_bill}
+              dueDateOfBill={card.due_date}
+              amountOfBill={card.bill_amount}
+              statusOfBill={card.status_bill}
             />
           ))}
         </div>
