@@ -4,6 +4,8 @@ import addBillIcon from "../../../public/icons/icon-addbill.png";
 import FieldDatePicker from "@/components/field/field-datepicker";
 import Image from "next/image";
 import useFormValidation from "@/hooks/useFormValidation";
+import useCreateDataBill from "@/hooks/useCreateDataBill";
+import moment from "moment-timezone";
 
 const initialFormValues = {
   name: "",
@@ -13,6 +15,10 @@ const initialFormValues = {
 };
 
 const ModalAdd = ({ showModal, onClose }) => {
+  const { createData, data, error, loading, success } = useCreateDataBill(
+    "/api/create-data-bill"
+  );
+
   const [resetKey, setResetKey] = useState(0);
   const {
     values,
@@ -24,11 +30,28 @@ const ModalAdd = ({ showModal, onClose }) => {
     resetValues,
   } = useFormValidation(initialFormValues);
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async () => {
     setResetKey((prevKey) => prevKey + 1);
     console.log(values);
-    resetValues();
-    onClose();
+
+    try {
+      const response = await createData({
+        type_of_bill: values.billType, // Match with API handler column names
+        name_of_bill: values.name, // Match with API handler column names
+        due_date: values.dueDate
+          ? moment(values.dueDate).format("YYYY-MM-DD")
+          : null, // Format date for the API
+        bill_amount: values.amount, // Match with API handler column names
+        status_bill: "pending", // Default or adjust as necessary
+      });
+
+      if (response.success) {
+        resetValues();
+        onClose();
+      }
+    } catch (error) {
+      console.error("Error creating bill:", error);
+    }
   };
 
   return (
@@ -167,7 +190,7 @@ const ModalAdd = ({ showModal, onClose }) => {
             onClick={handleSubmit(handleFormSubmit)}
             className="bg-[#F7B267] text-black px-4 py-2 rounded-lg w-full"
           >
-            Save
+            {loading ? "Saving..." : "Save"}
           </button>
         </footer>
       </div>

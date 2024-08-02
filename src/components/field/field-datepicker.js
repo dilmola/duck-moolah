@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Datepicker from "tailwind-datepicker-react";
 import CalendarIcon from "../../../public/icons/icon-calendar.png";
 import Image from "next/image";
+import moment from "moment-timezone";
 
 const options = {
   title: "",
@@ -40,15 +41,16 @@ const options = {
   },
 };
 
-const FieldDatePicker = ({ id, onChange, resetKey }) => {
+const FieldDatePicker = ({ id, onChange, resetKey, name }) => {
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const datepickerRef = useRef(null);
 
   const handleChange = (date) => {
-    setSelectedDate(date);
-    onChange(date);
-    console.log(date);
+    const malaysiaDate = moment.tz(date, "Asia/Kuala_Lumpur").toDate();
+    setSelectedDate(malaysiaDate);
+    onChange(malaysiaDate);
+    console.log(formatDateInMalaysiaTime(malaysiaDate));
   };
 
   const handleClose = (state) => {
@@ -72,11 +74,8 @@ const FieldDatePicker = ({ id, onChange, resetKey }) => {
     };
   }, []);
 
-  const formatDate = (date) => {
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+  const formatDateInMalaysiaTime = (date) => {
+    return moment(date).tz("Asia/Kuala_Lumpur").format("DD/MM/YYYY");
   };
 
   useEffect(() => {
@@ -87,6 +86,7 @@ const FieldDatePicker = ({ id, onChange, resetKey }) => {
     <div ref={datepickerRef} className="relative flex flex-1">
       <Datepicker
         id={id}
+        name={name}
         options={options}
         onChange={handleChange}
         show={show}
@@ -97,7 +97,7 @@ const FieldDatePicker = ({ id, onChange, resetKey }) => {
             type="text"
             className="bg-transparent flex-1 px-4 py-2 rounded-lg focus:outline-none focus:bg-white/20 focus:ring-inset border border-white/20 text-white placeholder-white/60 pr-12"
             placeholder="Select Date"
-            value={selectedDate ? formatDate(selectedDate) : ""}
+            value={selectedDate ? formatDateInMalaysiaTime(selectedDate) : ""}
             onFocus={() => setShow(true)}
             readOnly
           />

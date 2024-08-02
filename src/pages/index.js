@@ -16,7 +16,7 @@ const Nunito_Sans_init = Nunito_Sans({ subsets: ["latin"] });
 export default function Home() {
   const { typeOfView, setTypeOfView } = useContext(ViewContext);
   const [showModal, setShowModal] = useState(false);
-  const { data, error } = useGetAllDataBills("/api/get-all-data-bills");
+  const { data } = useGetAllDataBills("/api/get-all-data-bills");
 
   const openModal = () => {
     setShowModal(true);
@@ -52,8 +52,8 @@ export default function Home() {
           <h2 className=" text-2xl">January 2024</h2>
           <CardList cards={data} typeOfView={typeOfView} />
         </section>
-        <div className="relative h-12">
-          <div className="fixed bottom-14 transform translate-x-[71rem] bg-black/10 backdrop-blur-sm p-4 rounded-lg">
+        <div className="relative h-20">
+          <div className="fixed bottom-10 transform translate-x-[71rem] bg-black/10 backdrop-blur-sm p-4 rounded-lg">
             Amount: RM10000
           </div>
         </div>

@@ -37,16 +37,18 @@ const Card = ({
               </a>
             </div>
             <div>
-              <button
-                className={`px-4 rounded-lg ${
-                  statusOfBill === "paid"
-                    ? "bg-[#A7C957]/20 border border-[#A7C957] text-[#A7C957]"
-                    : ""
-                }`}
-                disabled={statusOfBill === "paid"}
-              >
-                {statusOfBill === "paid" ? "Paid" : statusOfBill}
-              </button>
+              {statusOfBill !== "pending" && (
+                <button
+                  className={`px-4 rounded-lg ${
+                    statusOfBill === "paid"
+                      ? "bg-[#A7C957]/20 border border-[#A7C957] text-[#A7C957]"
+                      : ""
+                  }`}
+                  disabled={statusOfBill === "paid"}
+                >
+                  {statusOfBill === "paid" ? "Paid" : statusOfBill}
+                </button>
+              )}
             </div>
           </div>
         </div>

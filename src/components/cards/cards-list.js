@@ -38,7 +38,7 @@ const CardsList = ({ cards }) => {
           ))}
         </div>
       ) : typeOfView === "cardsDetail" ? (
-        <div className="rounded-lg overflow-hidden border border-white/10">
+        <div className="rounded-lg border border-white/10">
           {cards.map((card, index) => (
             <CardDetail key={index} card={card} />
           ))}

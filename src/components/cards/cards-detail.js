@@ -17,7 +17,7 @@ const CardDetailItem = ({ card }) => {
       <section className="flex-1">{card.due_date}</section>
       <section className="flex-1">RM {card.bill_amount}</section>
       <footer className="flex-1">
-        {card.status_bill && (
+        {card.status_bill !== "pending" && (
           <button
             className={`px-4 rounded-lg ${
               card.status_bill === "paid"
