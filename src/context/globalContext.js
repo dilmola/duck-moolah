@@ -52,6 +52,8 @@ export function GlobalProvider({ children }) {
   };
 
   const fetchData = async () => {
+    setLoading(true);
+    setError(null);
     const getDataUrl = "/api/get-all-data-bills";
     try {
       const response = await fetch(getDataUrl);
@@ -62,18 +64,15 @@ export function GlobalProvider({ children }) {
         );
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
       const result = await response.json();
       setData(result);
     } catch (error) {
       console.error("Error fetching data:", error);
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const deleteBill = async (id) => {
     setSuccess(false);
@@ -152,6 +151,7 @@ export function GlobalProvider({ children }) {
         loading,
         success,
         deleteBill,
+        fetchData,
       }}
     >
       {children}

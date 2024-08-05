@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/router"; // Import useRouter
 import useLogin from "@/hooks/useLogin";
 import Logo from "../../public/logo/logo.png";
+import GlobalContext from "@/context/globalContext"; // Adjust the path accordingly
 
 const DemoComponent = () => {
   const [username, setUsername] = useState("");
   const router = useRouter(); // Initialize useRouter
   const { data: loginData, error: loginError } = useLogin(username);
-
+  const { fetchData } = useContext(GlobalContext);
   const handleLogin = (e) => {
     e.preventDefault();
     const submittedUsername = e.target.username.value;
@@ -19,8 +20,9 @@ const DemoComponent = () => {
   React.useEffect(() => {
     if (loginData) {
       router.push("/home"); // Redirect to /home on successful login
+      fetchData();
     }
-  }, [loginData, router]);
+  }, [loginData, router, fetchData]);
 
   return (
     <div className="flex items-center justify-center min-h-screen rounded-lg text-white bg-[#1b1b1b]/90 backdrop-blur-sm">

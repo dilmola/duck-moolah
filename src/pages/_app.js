@@ -6,7 +6,7 @@ import { GlobalProvider } from "@/context/globalContext";
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <ThemeProvider enableSystem={false} defaultTheme="light">
+      <ThemeProvider enableSystem={false} defaultTheme="dark">
         <GlobalProvider>
           <Head>
             <title>Duck Moolah</title>
