@@ -2,14 +2,15 @@ import ButtonContextMenu from "@/components/buttons/button-context-menu/button-c
 import styles from "./card.module.css";
 
 const Card = ({
+  idOfBill,
   typeAmount,
-  nameOfBil,
+  nameOfBill,
   dueDateOfBill,
   amountOfBill,
   statusOfBill,
 }) => {
-  const dotStyle =
-    typeAmount === "Fixed amount" ? styles.orangeDot : styles.yellowDot;
+
+  const dotStyle = typeAmount === "fixed" ? styles.orangeDot : styles.yellowDot;
 
   return (
     <>
@@ -22,9 +23,12 @@ const Card = ({
               ></div>
               <div className="font-thin text-white/60">{typeAmount} bill</div>
             </div>
-            <ButtonContextMenu />
+            <ButtonContextMenu
+              initialStatusOfBill={statusOfBill}
+              idOfBill={idOfBill}
+            />
           </div>
-          <div className="text-2xl mb-16">{nameOfBil}</div>
+          <div className="text-2xl mb-16">{nameOfBill}</div>
           <div className="flex justify-between">
             <div className="flex flex-col">
               <a>

@@ -2,6 +2,9 @@ import { useState } from "react";
 
 // Custom hook to manage form state and validation
 const useFormValidation = (initialValues) => {
+  const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
+
   const validate = (values) => {
     const errors = {};
     if (!values.name) {
@@ -20,11 +23,6 @@ const useFormValidation = (initialValues) => {
     }
     return errors;
   };
-  // State to store form values
-  const [values, setValues] = useState(initialValues);
-
-  // State to store form validation errors
-  const [errors, setErrors] = useState({});
 
   // Handler for input change events
   const handleChange = (e) => {

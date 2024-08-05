@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import CloseIcon from "../../../public/icons/icon-close.png";
 import addBillIcon from "../../../public/icons/icon-addbill.png";
 import FieldDatePicker from "@/components/field/field-datepicker";
 import Image from "next/image";
 import useFormValidation from "@/hooks/useFormValidation";
-import useCreateDataBill from "@/hooks/useCreateDataBill";
 import moment from "moment-timezone";
+import GlobalContext from "@/context/globalContext";
 
 const initialFormValues = {
   name: "",
@@ -14,12 +14,11 @@ const initialFormValues = {
   amount: "",
 };
 
-const ModalAdd = ({ showModal, onClose }) => {
-  const { createData, data, error, loading, success } = useCreateDataBill(
-    "/api/create-data-bill"
-  );
-
+const ModalAdd = () => {
   const [resetKey, setResetKey] = useState(0);
+  const { showModal, closeModal, createData, loading } =
+    useContext(GlobalContext);
+
   const {
     values,
     errors,
@@ -33,21 +32,22 @@ const ModalAdd = ({ showModal, onClose }) => {
   const handleFormSubmit = async () => {
     setResetKey((prevKey) => prevKey + 1);
     console.log(values);
-
+    console.log("successfull saveee");
+    closeModal(); 
+    resetValues(); 
     try {
       const response = await createData({
-        type_of_bill: values.billType, // Match with API handler column names
-        name_of_bill: values.name, // Match with API handler column names
+        type_of_bill: values.billType, 
+        name_of_bill: values.name, 
         due_date: values.dueDate
           ? moment(values.dueDate).format("YYYY-MM-DD")
-          : null, // Format date for the API
-        bill_amount: values.amount, // Match with API handler column names
-        status_bill: "pending", // Default or adjust as necessary
+          : null, 
+        bill_amount: values.amount, 
+        status_bill: "pending", 
       });
 
       if (response.success) {
-        resetValues();
-        onClose();
+        ("sucesson server");
       }
     } catch (error) {
       console.error("Error creating bill:", error);
@@ -78,7 +78,7 @@ const ModalAdd = ({ showModal, onClose }) => {
           <button
             className="cursor-pointer p-2 rounded-lg hover:rounded-3xl bg-black h-8 w-8"
             style={{ transition: "border-radius 0.3s ease-in-out" }}
-            onClick={onClose}
+            onClick={closeModal} // Use closeModal from context
             aria-label="Close modal"
           >
             <Image

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import styles from "./button-context-menu.module.css";
 import deleteIcon from "../../../../public/icons/icon-delete.png";
 import viewIcon from "../../../../public/icons/icon-viewdetail.png";
@@ -6,13 +6,16 @@ import editIcon from "../../../../public/icons/icon-edit.png";
 import paidIcon from "../../../../public/icons/icon-paid.png";
 import ModalEdit from "@/components/modals/modal-edit";
 import AlertDelete from "@/components/alert/alert-delete";
-
+import useUpdateStatusBill from "@/hooks/useUpdateStatusBill";
 import Image from "next/image";
+import GlobalContext from "@/context/globalContext";
 
-const ButtonContextMenu = () => {
+const ButtonContextMenu = ({ statusOfBill, idOfBill }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const { updateStatus } = useUpdateStatusBill("/api/update-status-bill");
+  const { updateCardStatus } = useContext(GlobalContext);
 
   const openModal = (event) => {
     event.stopPropagation();
@@ -41,7 +44,7 @@ const ButtonContextMenu = () => {
   }, [handleClickOutside]);
 
   const handleDeleteClick = (event) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
     setShowDeleteAlert(true);
   };
 
@@ -55,6 +58,26 @@ const ButtonContextMenu = () => {
     setShowDeleteAlert(false);
   };
 
+  const handleStatusClick = async (event, newStatus) => {
+    event.preventDefault(); // Prevent the default anchor behavior
+    event.stopPropagation();
+    if (!idOfBill) {
+      console.warn("No billId provided.");
+      return;
+    }
+
+    try {
+      await updateStatus(idOfBill, newStatus);
+      updateCardStatus(idOfBill, newStatus); // Update context to rerender the card
+
+      console.log(`Status updated to ${newStatus}`);
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+
+    setMenuOpen(false);
+  };
+
   return (
     <div
       className={`${styles.menuContainer} ${menuOpen ? styles.menuOpen : ""}`}
@@ -66,16 +89,28 @@ const ButtonContextMenu = () => {
       </div>
       {menuOpen && (
         <div className={`${styles.dropdownMenu} font-thin`}>
-          <div className={`${styles.dropdownItem} text-[#A7C957]`}>
-            <Image
-              src={paidIcon.src}
-              height={16}
-              width={16}
-              className={styles.iconItem}
-              alt="Paid icon"
-            />
-            <a href="#">Paid</a>
-          </div>
+          {statusOfBill === "paid" ? (
+            <div
+              className={styles.dropdownItem}
+              onClick={(event) => handleStatusClick(event, "pending")}
+            >
+              <a>Unpaid</a>
+            </div>
+          ) : (
+            <div
+              className={styles.dropdownItem}
+              onClick={(event) => handleStatusClick(event, "paid")}
+            >
+              <Image
+                src={paidIcon.src}
+                height={16}
+                width={16}
+                className={styles.iconItem}
+                alt="Paid icon"
+              />
+              <a className="text-[#A7C957]">Paid</a>
+            </div>
+          )}
           <div className={styles.dropdownItem}>
             <Image
               src={viewIcon.src}
@@ -111,11 +146,16 @@ const ButtonContextMenu = () => {
           </div>
         </div>
       )}
-      <ModalEdit showModal={showModal} onClose={closeModal} />{" "}
+      <ModalEdit
+        showModal={showModal}
+        onClose={closeModal}
+        idOfBill={idOfBill}
+      />
       <AlertDelete
         isOpen={showDeleteAlert}
         onConfirm={handleDeleteConfirm}
         onCancel={handleDeleteCancel}
+        idOfBill={idOfBill}
       />
     </div>
   );

@@ -7,12 +7,12 @@ import LargeCardIcon from "../../../../public/icons/icon-largecard.png";
 const nameView = [
   {
     data: "By detail",
-    value: "cardsDetail",
+    value: "cardsDetailItem",
     icon: DetailCardIcon,
   },
   {
     data: "By large cards",
-    value: "cardsLarge",
+    value: "cardsLargeItem",
     icon: LargeCardIcon,
   },
 ];

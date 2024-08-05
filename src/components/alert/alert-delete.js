@@ -1,5 +1,26 @@
-const AlertDelete = ({ isOpen, onConfirm, onCancel }) => {
+import GlobalContext from "@/context/globalContext";
+import { useState, useContext } from "react";
+
+const AlertDelete = ({ isOpen, onConfirm, onCancel, idOfBill }) => {
+  const { deleteBill, closeModal } = useContext(GlobalContext);
+
   if (!isOpen) return null;
+
+  const handleDeleteClick = async () => {
+    if (!idOfBill) {
+      console.warn("No billId provided.");
+      return;
+    }
+
+    try {
+      await deleteBill(idOfBill);
+      onConfirm();
+      closeModal();
+      console.log(`Bill deleted`);
+    } catch (error) {
+      console.error("Error deleting bill:", error);
+    }
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -21,7 +42,7 @@ const AlertDelete = ({ isOpen, onConfirm, onCancel }) => {
           </div>
           <div className="flex-1">
             <button
-              onClick={onConfirm}
+              onClick={handleDeleteClick}
               className="bg-red-500 text-white px-4 py-2 rounded-lg w-full"
             >
               Delete

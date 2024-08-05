@@ -4,6 +4,8 @@ import editBillIcon from "../../../public/icons/icon-edit.png";
 import FieldDatePicker from "@/components/field/field-datepicker";
 import Image from "next/image";
 import useFormValidation from "@/hooks/useFormValidation";
+import useUpdateDataBill from "@/hooks/useUpdateDataBill";
+import moment from "moment-timezone";
 
 const initialFormValues = {
   name: "",
@@ -12,7 +14,8 @@ const initialFormValues = {
   amount: "",
 };
 
-const ModalAdd = ({ showModal, onClose }) => {
+const ModalAdd = ({ showModal, onClose, idOfBill }) => {
+  const { updateBill, isUpdating } = useUpdateDataBill("/api/update-data-bill");
   const [resetKey, setResetKey] = useState(0);
   const {
     values,
@@ -24,11 +27,34 @@ const ModalAdd = ({ showModal, onClose }) => {
     resetValues,
   } = useFormValidation(initialFormValues);
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async () => {
     setResetKey((prevKey) => prevKey + 1);
     console.log(values);
-    resetValues();
-    onClose();
+
+    try {
+      const billProps = {
+        type_of_bill: values.billType,
+        name_of_bill: values.name,
+        due_date: values.dueDate
+          ? moment(values.dueDate).format("YYYY-MM-DD")
+          : null,
+        bill_amount: values.amount,
+        status_bill: "pending", 
+      };
+
+      if (!idOfBill || !billProps) {
+        console.error("Invalid idOfBill or billProps");
+        return;
+      }
+      const response = await updateBill(idOfBill, billProps);
+
+      if (response) {
+        resetValues();
+        onClose();
+      }
+    } catch (error) {
+      console.error("Error updating bill:", error);
+    }
   };
 
   return (
@@ -51,6 +77,7 @@ const ModalAdd = ({ showModal, onClose }) => {
               />
             </div>
             <h2 className="text-xl font-semibold">Edit Bill Detail</h2>
+            <h2 className="text-xl font-semibold">{idOfBill}</h2>
           </div>
           <button
             className="cursor-pointer p-2 rounded-lg hover:rounded-3xl bg-black h-8 w-8"
@@ -169,7 +196,7 @@ const ModalAdd = ({ showModal, onClose }) => {
             onClick={handleSubmit(handleFormSubmit)}
             className="bg-[#F7B267] text-black px-4 py-2 rounded-lg w-full"
           >
-            Save
+            {isUpdating ? "Updating..." : "Update"}
           </button>
         </footer>
       </div>

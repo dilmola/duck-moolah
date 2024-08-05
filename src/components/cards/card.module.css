@@ -1,6 +1,5 @@
-/* Card.module.css */
 .pulse {
-  animation: pulse 3s infinite;
+  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
@@ -9,8 +8,8 @@
     opacity: 1;
   }
   50% {
-    transform: scale(1.2);
-    opacity: 0.5;
+    transform: scale(1.4);
+    opacity: 0.6;
   }
   100% {
     transform: scale(1);
@@ -19,7 +18,7 @@
 }
 
 .orangeDot {
-  background-color: #da7f34;
+  background-color: #632121;
 }
 
 .yellowDot {
