@@ -12,7 +12,7 @@ const CardsList = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 100);
+    }, 800);
 
     return () => clearTimeout(timer);
   }, []);

@@ -24,7 +24,7 @@ const Card = ({
               <div className="font-thin text-white/60">{typeAmount} bill</div>
             </div>
             <ButtonContextMenu
-              initialStatusOfBill={statusOfBill}
+              statusOfBill={statusOfBill}
               idOfBill={idOfBill}
             />
           </div>

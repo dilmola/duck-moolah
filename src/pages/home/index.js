@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <main
-      className={`min-h-screen bg-gradient pt-12 selection:text-white selection:bg-[#f7a866] ${Nunito_Sans_init.className}`}
+      className={`min-h-screen bg-gradient pt-12 ${Nunito_Sans_init.className}`}
     >
       <div className="container mx-auto flex flex-col space-y-20 px-28">
         <Header />

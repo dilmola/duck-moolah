@@ -35,7 +35,14 @@ const CardDetailItem = ({
         )}
       </footer>
       <div className="flex items-center">
-        <ButtonContextMenu statusOfBill={statusOfBill} idOfBill={idOfBill} />
+        <ButtonContextMenu
+          statusOfBill={statusOfBill}
+          idOfBill={idOfBill}
+          typeAmount={typeAmount}
+          nameOfBill={nameOfBill}
+          dueDateOfBill={dueDateOfBill}
+          amountOfBill={amountOfBill}
+        />
       </div>
     </article>
   );

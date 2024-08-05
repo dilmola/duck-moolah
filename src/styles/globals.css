@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+  background-color: #f7a866; /* Custom background color for highlighted text */
+  color: #ffffff; /* Custom text color for highlighted text */
+}
+
+::-moz-selection {
+  background-color: #f7a866; /* Custom background color for highlighted text in Firefox */
+  color: #ffffff; /* Custom text color for highlighted text in Firefox */
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -15,6 +25,8 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
+
 
 body {
   color: rgb(var(--foreground-rgb));

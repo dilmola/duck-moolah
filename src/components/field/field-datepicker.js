@@ -41,14 +41,14 @@ const options = {
   },
 };
 
-const FieldDatePicker = ({ id, onChange, resetKey, name }) => {
+const FieldDatePicker = ({ id, onChange, resetKey, name, selectedDate }) => {
   const [show, setShow] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [date, setDate] = useState(selectedDate || null);
   const datepickerRef = useRef(null);
 
   const handleChange = (date) => {
     const malaysiaDate = moment.tz(date, "Asia/Kuala_Lumpur").toDate();
-    setSelectedDate(malaysiaDate);
+    setDate(malaysiaDate);
     onChange(malaysiaDate);
     console.log(formatDateInMalaysiaTime(malaysiaDate));
   };
@@ -56,6 +56,10 @@ const FieldDatePicker = ({ id, onChange, resetKey, name }) => {
   const handleClose = (state) => {
     setShow(state);
   };
+
+  useEffect(() => {
+    setDate(selectedDate || null);
+  }, [selectedDate, resetKey]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -77,10 +81,6 @@ const FieldDatePicker = ({ id, onChange, resetKey, name }) => {
   const formatDateInMalaysiaTime = (date) => {
     return moment(date).tz("Asia/Kuala_Lumpur").format("DD/MM/YYYY");
   };
-
-  useEffect(() => {
-    setSelectedDate(null); // Reset the selected date
-  }, [resetKey]);
 
   return (
     <div ref={datepickerRef} className="relative flex flex-1">

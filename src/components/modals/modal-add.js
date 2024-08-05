@@ -26,24 +26,22 @@ const ModalAdd = () => {
     handleDateChange,
     handleBillTypeChange,
     handleSubmit,
-    resetValues,
   } = useFormValidation(initialFormValues);
 
   const handleFormSubmit = async () => {
     setResetKey((prevKey) => prevKey + 1);
     console.log(values);
     console.log("successfull saveee");
-    closeModal(); 
-    resetValues(); 
+    closeModal();
     try {
       const response = await createData({
-        type_of_bill: values.billType, 
-        name_of_bill: values.name, 
+        type_of_bill: values.billType,
+        name_of_bill: values.name,
         due_date: values.dueDate
           ? moment(values.dueDate).format("YYYY-MM-DD")
-          : null, 
-        bill_amount: values.amount, 
-        status_bill: "pending", 
+          : null,
+        bill_amount: values.amount,
+        status_bill: "pending",
       });
 
       if (response.success) {
@@ -155,6 +153,11 @@ const ModalAdd = () => {
                   id="due-date"
                   onChange={handleDateChange}
                   resetKey={resetKey}
+                  selectedDate={
+                    values.dueDate
+                      ? moment(values.dueDate, "DD/MM/YYYY").toDate()
+                      : null
+                  }
                 />
                 {errors.dueDate && (
                   <p className="text-red-500 text-sm">{errors.dueDate}</p>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CloseIcon from "../../../public/icons/icon-close.png";
 import editBillIcon from "../../../public/icons/icon-edit.png";
 import FieldDatePicker from "@/components/field/field-datepicker";
@@ -6,6 +6,7 @@ import Image from "next/image";
 import useFormValidation from "@/hooks/useFormValidation";
 import useUpdateDataBill from "@/hooks/useUpdateDataBill";
 import moment from "moment-timezone";
+import GlobalContext from "@/context/globalContext";
 
 const initialFormValues = {
   name: "",
@@ -14,9 +15,18 @@ const initialFormValues = {
   amount: "",
 };
 
-const ModalAdd = ({ showModal, onClose, idOfBill }) => {
+const ModalEdit = ({
+  showModal,
+  onClose,
+  idOfBill,
+  typeAmount,
+  nameOfBill,
+  dueDateOfBill,
+  amountOfBill,
+}) => {
   const { updateBill, isUpdating } = useUpdateDataBill("/api/update-data-bill");
   const [resetKey, setResetKey] = useState(0);
+  
   const {
     values,
     errors,
@@ -25,7 +35,23 @@ const ModalAdd = ({ showModal, onClose, idOfBill }) => {
     handleBillTypeChange,
     handleSubmit,
     resetValues,
+    setValues,
   } = useFormValidation(initialFormValues);
+
+  useEffect(() => {
+    if (showModal) {
+      console.log("dueDateOfBill:", dueDateOfBill); // Log dueDateOfBill
+
+      setValues({
+        name: nameOfBill || "",
+        billType: typeAmount || "",
+        dueDate: dueDateOfBill
+          ? moment(dueDateOfBill, "YYYY-MM-DD").format("DD/MM/YYYY")
+          : "",
+        amount: amountOfBill || "",
+      });
+    }
+  }, [showModal, dueDateOfBill]);
 
   const handleFormSubmit = async () => {
     setResetKey((prevKey) => prevKey + 1);
@@ -39,7 +65,7 @@ const ModalAdd = ({ showModal, onClose, idOfBill }) => {
           ? moment(values.dueDate).format("YYYY-MM-DD")
           : null,
         bill_amount: values.amount,
-        status_bill: "pending", 
+        status_bill: "pending",
       };
 
       if (!idOfBill || !billProps) {
@@ -160,6 +186,11 @@ const ModalAdd = ({ showModal, onClose, idOfBill }) => {
                     id="due-date"
                     onChange={handleDateChange}
                     resetKey={resetKey}
+                    selectedDate={
+                      values.dueDate
+                        ? moment(values.dueDate, "DD/MM/YYYY").toDate()
+                        : null
+                    }
                   />
                   {errors.dueDate && (
                     <p className="text-red-500 text-sm">{errors.dueDate}</p>
@@ -204,4 +235,4 @@ const ModalAdd = ({ showModal, onClose, idOfBill }) => {
   );
 };
 
-export default ModalAdd;
+export default ModalEdit;

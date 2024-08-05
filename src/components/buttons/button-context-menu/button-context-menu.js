@@ -10,7 +10,14 @@ import useUpdateStatusBill from "@/hooks/useUpdateStatusBill";
 import Image from "next/image";
 import GlobalContext from "@/context/globalContext";
 
-const ButtonContextMenu = ({ statusOfBill, idOfBill }) => {
+const ButtonContextMenu = ({
+  idOfBill,
+  typeAmount,
+  nameOfBill,
+  dueDateOfBill,
+  amountOfBill,
+  statusOfBill,
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
@@ -150,6 +157,11 @@ const ButtonContextMenu = ({ statusOfBill, idOfBill }) => {
         showModal={showModal}
         onClose={closeModal}
         idOfBill={idOfBill}
+        statusOfBill={statusOfBill}
+        typeAmount={typeAmount}
+        nameOfBill={nameOfBill}
+        dueDateOfBill={dueDateOfBill}
+        amountOfBill={amountOfBill}
       />
       <AlertDelete
         isOpen={showDeleteAlert}

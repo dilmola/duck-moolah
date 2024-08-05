@@ -74,6 +74,10 @@ export function GlobalProvider({ children }) {
     }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
   const deleteBill = async (id) => {
     setSuccess(false);
     setError(null);
