@@ -25,7 +25,6 @@ const options = {
     inputIcon: "",
     selected: "bg-[#F7B267] text-black hover:bg-[#111111]",
   },
-
   datepickerClassNames: "top-22",
   defaultDate: new Date(),
   language: "en",
@@ -97,7 +96,7 @@ const FieldDatePicker = ({ id, onChange, resetKey, name, selectedDate }) => {
             type="text"
             className="bg-transparent flex-1 px-4 py-2 rounded-lg focus:outline-none focus:bg-white/20 focus:ring-inset border border-white/20 text-white placeholder-white/60 pr-12"
             placeholder="Select Date"
-            value={selectedDate ? formatDateInMalaysiaTime(selectedDate) : ""}
+            value={date ? formatDateInMalaysiaTime(date) : ""}
             onFocus={() => setShow(true)}
             readOnly
           />

@@ -9,7 +9,6 @@ const Card = ({
   amountOfBill,
   statusOfBill,
 }) => {
-
   const dotStyle = typeAmount === "fixed" ? styles.orangeDot : styles.yellowDot;
 
   return (
@@ -26,6 +25,10 @@ const Card = ({
             <ButtonContextMenu
               statusOfBill={statusOfBill}
               idOfBill={idOfBill}
+              typeAmount={typeAmount}
+              nameOfBill={nameOfBill}
+              dueDateOfBill={dueDateOfBill}
+              amountOfBill={amountOfBill}
             />
           </div>
           <div className="text-2xl mb-16">{nameOfBill}</div>

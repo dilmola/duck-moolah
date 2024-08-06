@@ -66,7 +66,7 @@ const ButtonContextMenu = ({
   };
 
   const handleStatusClick = async (event, newStatus) => {
-    event.preventDefault(); // Prevent the default anchor behavior
+    event.preventDefault(); 
     event.stopPropagation();
     if (!idOfBill) {
       console.warn("No billId provided.");
@@ -75,7 +75,7 @@ const ButtonContextMenu = ({
 
     try {
       await updateStatus(idOfBill, newStatus);
-      updateCardStatus(idOfBill, newStatus); // Update context to rerender the card
+      updateCardStatus(idOfBill, newStatus); 
 
       console.log(`Status updated to ${newStatus}`);
     } catch (error) {

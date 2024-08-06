@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-// Custom hook to manage form state and validation
 const useFormValidation = (initialValues) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
@@ -24,7 +23,6 @@ const useFormValidation = (initialValues) => {
     return errors;
   };
 
-  // Handler for input change events
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prevValues) => ({
@@ -33,7 +31,6 @@ const useFormValidation = (initialValues) => {
     }));
   };
 
-  // Handler for date change events
   const handleDateChange = (date) => {
     setValues((prevValues) => ({
       ...prevValues,
@@ -41,7 +38,6 @@ const useFormValidation = (initialValues) => {
     }));
   };
 
-  // Handler for changing bill type
   const handleBillTypeChange = (type) => {
     setValues((prevValues) => ({
       ...prevValues,
@@ -49,7 +45,6 @@ const useFormValidation = (initialValues) => {
     }));
   };
 
-  // Handler for form submission
   const handleSubmit = (callback) => (e) => {
     e.preventDefault();
     const validationErrors = validate(values);
@@ -73,7 +68,7 @@ const useFormValidation = (initialValues) => {
     handleBillTypeChange,
     handleSubmit,
     resetValues,
-    setValues, // Corrected: Provide setValues here
+    setValues, 
   };
 };
 

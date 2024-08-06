@@ -77,7 +77,40 @@ export function GlobalProvider({ children }) {
   useEffect(() => {
     fetchData();
   }, []);
-  
+
+  const updateBill = async (idOfBill, billProps) => {
+    setLoading(true);
+    setError(null);
+    const updateDataUrl = "/api/update-data-bill";
+
+    try {
+      const response = await fetch(updateDataUrl, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idOfBill, ...billProps }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(
+          `HTTP error! Status: ${response.status}, Response: ${errorText}`
+        );
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      setSuccess(true);
+      fetchData(); 
+      console.log("Bill updated", data);
+    } catch (error) {
+      console.error("Error updating status:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const deleteBill = async (id) => {
     setSuccess(false);
     setError(null);
@@ -156,6 +189,7 @@ export function GlobalProvider({ children }) {
         success,
         deleteBill,
         fetchData,
+        updateBill,
       }}
     >
       {children}

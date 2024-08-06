@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CloseIcon from "../../../public/icons/icon-close.png";
 import editBillIcon from "../../../public/icons/icon-edit.png";
 import FieldDatePicker from "@/components/field/field-datepicker";
@@ -24,9 +24,9 @@ const ModalEdit = ({
   dueDateOfBill,
   amountOfBill,
 }) => {
-  const { updateBill, isUpdating } = useUpdateDataBill("/api/update-data-bill");
   const [resetKey, setResetKey] = useState(0);
-  
+  const { updateBill, setLoading } = useContext(GlobalContext);
+
   const {
     values,
     errors,
@@ -40,7 +40,7 @@ const ModalEdit = ({
 
   useEffect(() => {
     if (showModal) {
-      console.log("dueDateOfBill:", dueDateOfBill); // Log dueDateOfBill
+      console.log("dueDateOfBill:", dueDateOfBill);
 
       setValues({
         name: nameOfBill || "",
@@ -56,13 +56,14 @@ const ModalEdit = ({
   const handleFormSubmit = async () => {
     setResetKey((prevKey) => prevKey + 1);
     console.log(values);
+    onClose();
 
     try {
       const billProps = {
         type_of_bill: values.billType,
         name_of_bill: values.name,
         due_date: values.dueDate
-          ? moment(values.dueDate).format("YYYY-MM-DD")
+          ? moment(values.dueDate, "DD/MM/YYYY").format("YYYY-MM-DD")
           : null,
         bill_amount: values.amount,
         status_bill: "pending",
@@ -76,7 +77,6 @@ const ModalEdit = ({
 
       if (response) {
         resetValues();
-        onClose();
       }
     } catch (error) {
       console.error("Error updating bill:", error);
@@ -227,7 +227,7 @@ const ModalEdit = ({
             onClick={handleSubmit(handleFormSubmit)}
             className="bg-[#F7B267] text-black px-4 py-2 rounded-lg w-full"
           >
-            {isUpdating ? "Updating..." : "Update"}
+            {setLoading ? "Updating..." : "Update"}
           </button>
         </footer>
       </div>
