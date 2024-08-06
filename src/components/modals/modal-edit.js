@@ -66,7 +66,6 @@ const ModalEdit = ({
           ? moment(values.dueDate, "DD/MM/YYYY").format("YYYY-MM-DD")
           : null,
         bill_amount: values.amount,
-        status_bill: "pending",
       };
 
       if (!idOfBill || !billProps) {

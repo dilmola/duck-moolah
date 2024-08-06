@@ -6,15 +6,20 @@ import ButtonView from "@/components/buttons/button-view/button-view";
 import ButtonSort from "@/components/buttons/button-sort/button-sort";
 import ButtonDownload from "@/components/buttons/button-download/button-download";
 import ButtonAdd from "@/components/buttons/button-add/button-add";
-import CardList from "@/components/cards/cards-list";
+import CardsList from "@/components/cards/cards-list";
 import ModalAdd from "@/components/modals/modal-add";
 import GlobalContext from "@/context/globalContext";
+import { useAmount } from "@/hooks/useAmount"; // Import the custom hook
 
 const Nunito_Sans_init = Nunito_Sans({ subsets: ["latin"] });
 
 export default function Home() {
   const { typeOfView, setTypeOfView, closeModal, openModal, showModal } =
     useContext(GlobalContext);
+  const totalAmount = useAmount(); // Use the custom hook to get total amount
+
+  // Log the total amount for debugging
+  console.log("Total amount in Home component:", totalAmount);
 
   return (
     <main
@@ -41,11 +46,11 @@ export default function Home() {
         </section>
         <section className="mt-12 space-y-4">
           <h2 className=" text-2xl">January 2024</h2>
-          <CardList typeOfView={typeOfView} />
+          <CardsList typeOfView={typeOfView} />
         </section>
         <div className="relative h-20">
-          <div className="fixed bottom-10 transform translate-x-[71rem] bg-black/10 backdrop-blur-sm p-4 rounded-lg">
-            Amount: RM10000
+          <div className="fixed bottom-10 transform translate-x-[71rem] bg-black/10 backdrop-blur-sm p-4 rounded-lg flex flex-row space-x-2">
+            <div>Amount: RM </div> <div>{totalAmount}</div>
           </div>
         </div>
       </div>

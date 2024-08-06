@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import Card from "./card-large-item";
 import CardDetail from "@/components/cards/cards-detail-item";
 import GlobalContext from "@/context/globalContext";
-import { SkeletonLoader } from "@/components/loader/loader-skeleton";
+import { SkeletonLoaderCard } from "@/components/loader/loader-skeleton-card";
 
 const CardsList = () => {
   const { typeOfView, data: cards, error } = useContext(GlobalContext);
@@ -12,13 +12,13 @@ const CardsList = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 800);
+    }, 1200);
 
     return () => clearTimeout(timer);
   }, []);
 
   if (isLoading) {
-    return <SkeletonLoader />;
+    return <SkeletonLoaderCard />;
   }
 
   if (error) {

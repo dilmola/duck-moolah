@@ -1,4 +1,4 @@
-export function SkeletonLoader() {
+export function SkeletonLoaderCard() {
   return (
     <div className="space-y-4">
       <div className="flex flex-col space-y-4">

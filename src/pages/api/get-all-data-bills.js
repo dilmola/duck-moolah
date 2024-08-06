@@ -14,6 +14,7 @@ async function handler(req, res) {
       const { data, error } = await supabase
         .from("bills")
         .select("*")
+        .eq("user_id", userId)
         .order("id", { ascending: true });
 
       if (error) {
