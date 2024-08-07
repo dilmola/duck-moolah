@@ -35,9 +35,9 @@ const FilterDate = ({ options, selected, onSelect, placeholder }) => {
       </button>
       {isOpen && (
         <ul
-          className={`${styles.customDropdown} absolute z-10 mt-1 w-full bg-[#282828] rounded-lg max-h-64 overflow-y-auto`}
+          className={`${styles.customDropdown} absolute mt-1 w-full bg-[#282828] rounded-lg max-h-64 overflow-y-auto z-50`}
         >
-          {options.map((option, index) => (
+          {options.map((option, _) => (
             <li
               key={option}
               className="px-4 py-2 cursor-pointer hover:bg-[#2d3236]"

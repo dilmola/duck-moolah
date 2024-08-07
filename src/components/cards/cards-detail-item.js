@@ -20,18 +20,20 @@ const CardDetailItem = ({
       <section className="flex-1">{nameOfBill}</section>
       <section className="flex-1">{dueDateOfBill}</section>
       <section className="flex-1">RM {amountOfBill}</section>
-      <footer className="flex-1">
+      <footer className="relative flex-1">
         {statusOfBill !== "pending" && (
-          <button
-            className={`px-4 rounded-lg ${
-              statusOfBill === "paid"
-                ? "bg-[#A7C957]/20  border-[#A7C957] text-[#A7C957]"
-                : ""
-            }`}
-            disabled={statusOfBill === "paid"}
-          >
-            {statusOfBill === "paid" ? "Paid" : statusOfBill}
-          </button>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <button
+              className={`px-4 rounded-lg ${
+                statusOfBill === "paid"
+                  ? "bg-[#A7C957]/20 border border-[#A7C957] text-[#A7C957]"
+                  : ""
+              }`}
+              disabled={statusOfBill === "paid"}
+            >
+              {statusOfBill === "paid" ? "Paid" : statusOfBill}
+            </button>
+          </div>
         )}
       </footer>
       <div className="flex items-center">

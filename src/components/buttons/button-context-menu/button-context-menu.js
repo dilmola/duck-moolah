@@ -95,7 +95,11 @@ const ButtonContextMenu = ({
         <div className={styles.dot}></div>
         <div className={styles.dot}></div>
       </div>
-      {menuOpen && (
+      <div
+        className={`absolute top-full right-0 w-max rounded-lg shadow-md transition-all duration-100 z-50 ${
+          menuOpen ? "" : "opacity-0 -translate-y-4"
+        }`}
+      >
         <div className={`${styles.dropdownMenu} font-thin`}>
           {statusOfBill === "paid" ? (
             <div
@@ -160,7 +164,7 @@ const ButtonContextMenu = ({
             <a href="#">Delete</a>
           </div>
         </div>
-      )}
+      </div>
       <ModalEdit
         showModal={showModal}
         onClose={closeModal}

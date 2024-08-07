@@ -43,7 +43,13 @@ const ButtonView = ({ setTypeOfView }) => {
       <button className="px-4" onClick={toggleDropdown}>
         <img src={ViewIcon.src} alt="icon" className="h-4 w-4 object-contain" />
       </button>
-      {showDropdown && (
+      <div
+        className={`absolute top-full right-0 w-max rounded-lg shadow-md transition-all duration-100  ${
+          showDropdown
+            ? ""
+            : "opacity-0 -translate-y-4 pointer-events-none"
+        }`}
+      >
         <div className="absolute top-full right-0 w-max bg-[#1b1b1b] rounded-lg shadow-md">
           <div className="p-2 flex flex-col font-thin">
             {nameView.map((filterOption) => (
@@ -62,7 +68,7 @@ const ButtonView = ({ setTypeOfView }) => {
             ))}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

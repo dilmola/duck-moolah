@@ -16,10 +16,9 @@ const DemoComponent = () => {
     console.log("Submitted username:", submittedUsername);
   };
 
-  // Check for login success and redirect
   React.useEffect(() => {
     if (loginData) {
-      router.push("/home"); // Redirect to /home on successful login
+      router.push("/home"); 
       fetchData();
     }
   }, [loginData, router, fetchData]);

@@ -84,9 +84,12 @@ const ModalEdit = ({
 
   return (
     <div
-      className={`fixed inset-0 flex justify-center items-center z-50 ${
-        showModal ? "" : "hidden"
+      className={`fixed inset-0 flex justify-center items-center z-50  transition-all duration-100 transform ${
+        showModal
+          ? ""
+          : "opacity-0 -translate-y-4 pointer-events-none"
       }`}
+      aria-hidden={!showModal}
       aria-modal="true"
       role="dialog"
     >

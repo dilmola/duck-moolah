@@ -44,13 +44,37 @@ const CardsList = () => {
 
   return (
     <>
-      {typeOfView === "cardsLargeItem" ? (
-        <div className="grid grid-cols-3 gap-6">{mapOfCards}</div>
-      ) : typeOfView === "cardsDetailItem" ? (
-        <div className="rounded-lg border border-white/10">{mapOfCards}</div>
-      ) : (
-        <div>No view type selected</div>
-      )}
+      <div
+        className={`transition-opacity duration-300 ease-in  ${
+          typeOfView === "cardsLargeItem"
+            ? "opacity-100 "
+            : "opacity-0 pointer-events-none"
+        } ${typeOfView === "cardsLargeItem" ? "grid grid-cols-3 gap-6" : ""}`}
+      >
+        {typeOfView === "cardsLargeItem" && mapOfCards}
+      </div>
+
+      <div
+        className={`transition-opacity duration-300 ease-in  ${
+          typeOfView === "cardsDetailItem"
+            ? "opacity-100"
+            : "opacity-0 pointer-events-none"
+        } ${
+          typeOfView === "cardsDetailItem"
+            ? "rounded-lg border border-white/10"
+            : ""
+        }`}
+      >
+        {typeOfView === "cardsDetailItem" && mapOfCards}
+      </div>
+
+      <div
+        className={`transition-opacity duration-300 ease-in  ${
+          typeOfView === "" ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {typeOfView === "" && "No view type selected"}
+      </div>
     </>
   );
 };
