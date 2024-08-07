@@ -4,6 +4,7 @@ import deleteIcon from "../../../../public/icons/icon-delete.png";
 import viewIcon from "../../../../public/icons/icon-viewdetail.png";
 import editIcon from "../../../../public/icons/icon-edit.png";
 import paidIcon from "../../../../public/icons/icon-paid.png";
+import unpaidIcon from "../../../../public/icons/icon-pending.png";
 import ModalEdit from "@/components/modals/modal-edit";
 import AlertDelete from "@/components/alert/alert-delete";
 import useUpdateStatusBill from "@/hooks/useUpdateStatusBill";
@@ -66,7 +67,7 @@ const ButtonContextMenu = ({
   };
 
   const handleStatusClick = async (event, newStatus) => {
-    event.preventDefault(); 
+    event.preventDefault();
     event.stopPropagation();
     if (!idOfBill) {
       console.warn("No billId provided.");
@@ -75,7 +76,7 @@ const ButtonContextMenu = ({
 
     try {
       await updateStatus(idOfBill, newStatus);
-      updateCardStatus(idOfBill, newStatus); 
+      updateCardStatus(idOfBill, newStatus);
 
       console.log(`Status updated to ${newStatus}`);
     } catch (error) {
@@ -101,7 +102,14 @@ const ButtonContextMenu = ({
               className={styles.dropdownItem}
               onClick={(event) => handleStatusClick(event, "pending")}
             >
-              <a>Unpaid</a>
+              <Image
+                src={unpaidIcon.src}
+                height={16}
+                width={16}
+                className={styles.iconItem}
+                alt="Unpaid icon"
+              />
+              <a className="text-[#e84243]">Unpaid</a>
             </div>
           ) : (
             <div

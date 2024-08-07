@@ -25,7 +25,7 @@ const CardDetailItem = ({
           <button
             className={`px-4 rounded-lg ${
               statusOfBill === "paid"
-                ? "bg-[#A7C957]/20 border border-[#A7C957] text-[#A7C957]"
+                ? "bg-[#A7C957]/20  border-[#A7C957] text-[#A7C957]"
                 : ""
             }`}
             disabled={statusOfBill === "paid"}
