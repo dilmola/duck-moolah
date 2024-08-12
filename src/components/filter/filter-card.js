@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import FilterDate from "@/components/filter/filter-date";
+import GlobalContext from "@/context/globalContext";
 
 const FilterCard = () => {
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
+  const { filterDataByDate } = useContext(GlobalContext);
 
   const handleYearChange = (year) => {
     setSelectedYear(year);
@@ -16,8 +18,9 @@ const FilterCard = () => {
   useEffect(() => {
     if (selectedYear && selectedMonth) {
       console.log(`${selectedMonth}-${selectedYear}`);
+      filterDataByDate(selectedMonth, selectedYear);
     }
-  }, [selectedYear, selectedMonth]);
+  }, [selectedYear, selectedMonth, filterDataByDate]);
 
   const currentYear = new Date().getFullYear();
   const years = Array.from(

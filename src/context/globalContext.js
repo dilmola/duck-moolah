@@ -1,18 +1,21 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 
 const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
   const [typeOfView, setTypeOfView] = useState(null);
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const openModal = () => {
     setShowModal(true);
   };
+
   const closeModal = () => {
     setShowModal(false);
   };
@@ -54,6 +57,13 @@ export function GlobalProvider({ children }) {
   const fetchData = async () => {
     setLoading(true);
     setError(null);
+
+    if (searchQuery) {
+      searchesData(searchQuery);
+      setLoading(false);
+      return;
+    }
+
     const getDataUrl = "/api/get-all-data-bills";
     try {
       const response = await fetch(getDataUrl);
@@ -66,6 +76,7 @@ export function GlobalProvider({ children }) {
       }
       const result = await response.json();
       setData(result);
+      setFilteredData(result);
     } catch (error) {
       console.error("Error fetching data:", error);
       setError(error.message);
@@ -101,7 +112,11 @@ export function GlobalProvider({ children }) {
       }
       const data = await response.json();
       setSuccess(true);
-      fetchData(); 
+      fetchData();
+      console.log(
+        "This runs immediately after fetchData() is called, not waiting for it to finish."
+      );
+
       console.log("Bill updated", data);
     } catch (error) {
       console.error("Error updating status:", error);
@@ -137,7 +152,7 @@ export function GlobalProvider({ children }) {
       const result = await response.json();
 
       console.log("Delete successful");
-      fetchData();
+      fetchData(); // Re-fetch all data or search results
       return result;
     } catch (error) {
       console.error("Error deleting bill:", error);
@@ -158,6 +173,63 @@ export function GlobalProvider({ children }) {
     }
   }, []);
 
+  const searchesData = async (query) => {
+    setSearchQuery(query);
+    setLoading(true);
+    setError(null);
+    const searchesDataUrl = `/api/searches-data-bill?q=${query}`;
+    try {
+      const response = await fetch(searchesDataUrl);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(
+          `HTTP error! Status: ${response.status}, Response: ${errorText}`
+        );
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const result = await response.json();
+      setData(result);
+      setFilteredData(result);
+      return result;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filterDataByDate = useCallback(
+    async (month, year) => {
+      setLoading(true);
+      setError(null);
+
+      const filterDataUrl = `/api/filter-data-bills-bydate?month=${month}&year=${year}`;
+      try {
+        const response = await fetch(filterDataUrl);
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error(
+            `HTTP error! Status: ${response.status}, Response: ${errorText}`
+          );
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const result = await response.json();
+
+        if (JSON.stringify(result) !== JSON.stringify(filteredData)) {
+          setData(result);
+          setFilteredData(result);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [filteredData]
+  ); 
+
   useEffect(() => {
     if (typeOfView !== null) {
       localStorage.setItem("typeOfView", typeOfView);
@@ -167,6 +239,11 @@ export function GlobalProvider({ children }) {
   const updateCardStatus = (id, newStatus) => {
     setData((prevData) =>
       prevData.map((card) =>
+        card.id === id ? { ...card, status_bill: newStatus } : card
+      )
+    );
+    setFilteredData((prevFilteredData) =>
+      prevFilteredData.map((card) =>
         card.id === id ? { ...card, status_bill: newStatus } : card
       )
     );
@@ -190,6 +267,9 @@ export function GlobalProvider({ children }) {
         deleteBill,
         fetchData,
         updateBill,
+        searchesData,
+        filteredData,
+        filterDataByDate,
       }}
     >
       {children}

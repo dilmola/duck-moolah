@@ -18,7 +18,6 @@ export default function Home() {
     useContext(GlobalContext);
   const totalAmount = useAmount(); // Use the custom hook to get total amount
 
-  // Log the total amount for debugging
   console.log("Total amount in Home component:", totalAmount);
 
   return (

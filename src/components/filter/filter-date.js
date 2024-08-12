@@ -31,7 +31,11 @@ const FilterDate = ({ options, selected, onSelect, placeholder }) => {
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {selected || placeholder}
-        <img src={ArrowIcon.src} alt="icon" className="ml-2 h-2 w-2 object-contain" />
+        <img
+          src={ArrowIcon.src}
+          alt="icon"
+          className="ml-2 h-2 w-2 object-contain"
+        />
       </button>
       {isOpen && (
         <ul

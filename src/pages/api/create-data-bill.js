@@ -1,5 +1,6 @@
 import { supabase } from "../../lib/supabaseClient";
 import authMiddleware from "../../../authMiddleware";
+import moment from "moment-timezone";
 
 async function handler(req, res) {
   if (!supabase) {
@@ -21,6 +22,17 @@ async function handler(req, res) {
         return res.status(400).json({ error: "All fields are required" });
       }
 
+      console.log({
+        type_of_bill,
+        name_of_bill,
+        due_date,
+        bill_amount,
+        status_bill,
+      });
+
+      const dateBillCreated = moment().tz("Asia/Kuala_Lumpur").format();
+      console.log(dateBillCreated);
+
       const { data, error } = await supabase.from("bills").insert([
         {
           type_of_bill: type_of_bill,
@@ -28,7 +40,8 @@ async function handler(req, res) {
           due_date: due_date,
           bill_amount: bill_amount,
           status_bill: status_bill || "pending",
-          user_id: userId, // Include user_id in the object
+          user_id: userId,
+          date_bill_created: dateBillCreated,
         },
       ]);
 
@@ -47,4 +60,3 @@ async function handler(req, res) {
 }
 
 export default authMiddleware(handler);
-

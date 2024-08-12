@@ -45,6 +45,7 @@ const ModalAdd = () => {
         bill_amount: values.amount,
         status_bill: "pending",
       });
+      console.log(new Date());
 
       if (response.success) {
         ("sucesson server");
