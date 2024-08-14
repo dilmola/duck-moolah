@@ -4,6 +4,7 @@ const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
   const [typeOfView, setTypeOfView] = useState(null);
+  const [userdata, setUserData] = useState([]);
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [error, setError] = useState(null);
@@ -11,6 +12,7 @@ export function GlobalProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [formattedDate, setFormattedDate] = useState("");
 
   const openModal = () => {
     setShowModal(true);
@@ -18,6 +20,30 @@ export function GlobalProvider({ children }) {
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const fetchUsers = async () => {
+    setLoading(true);
+    setError(null);
+
+    const getUserDataUrl = "/api/get-users-data";
+    try {
+      const response = await fetch(getUserDataUrl);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(
+          `HTTP error! Status: ${response.status}, Response: ${errorText}`
+        );
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const result = await response.json();
+      setUserData(result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const createData = async (newBill) => {
@@ -199,6 +225,11 @@ export function GlobalProvider({ children }) {
     }
   };
 
+  const formatDate = (month, year) => {
+    const date = new Date(year, month - 1); // Months are 0-indexed
+    return date.toLocaleString("default", { month: "long", year: "numeric" });
+  };
+
   const filterDataByDate = useCallback(
     async (month, year) => {
       setLoading(true);
@@ -220,6 +251,7 @@ export function GlobalProvider({ children }) {
           setData(result);
           setFilteredData(result);
         }
+        setFormattedDate(formatDate(month, year));
       } catch (error) {
         console.error("Error fetching data:", error);
         setError(error.message);
@@ -228,7 +260,7 @@ export function GlobalProvider({ children }) {
       }
     },
     [filteredData]
-  ); 
+  );
 
   useEffect(() => {
     if (typeOfView !== null) {
@@ -270,6 +302,9 @@ export function GlobalProvider({ children }) {
         searchesData,
         filteredData,
         filterDataByDate,
+        formattedDate,
+        userdata,
+        fetchUsers,
       }}
     >
       {children}

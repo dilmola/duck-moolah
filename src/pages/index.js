@@ -8,7 +8,7 @@ const DemoComponent = () => {
   const [username, setUsername] = useState("");
   const router = useRouter(); // Initialize useRouter
   const { data: loginData, error: loginError } = useLogin(username);
-  const { fetchData } = useContext(GlobalContext);
+  const { fetchData, fetchUsers } = useContext(GlobalContext);
   const handleLogin = (e) => {
     e.preventDefault();
     const submittedUsername = e.target.username.value;
@@ -18,8 +18,9 @@ const DemoComponent = () => {
 
   React.useEffect(() => {
     if (loginData) {
-      router.push("/home"); 
+      router.push("/home");
       fetchData();
+      fetchUsers();
     }
   }, [loginData, router, fetchData]);
 

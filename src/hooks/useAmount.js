@@ -23,13 +23,11 @@ export function useAmount() {
     return 0;
   }
 
-  // Compute the total amount
   const totalAmount = amountbill.reduce(
     (total, bill) => total + bill.bill_amount,
     0
   );
 
-  // Log the total amount for debugging
   console.log("Total amount from GlobalContext:", totalAmount);
 
   return totalAmount;

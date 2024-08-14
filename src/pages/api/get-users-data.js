@@ -1,6 +1,5 @@
 import authMiddleware from "../../../authMiddleware";
 import { supabase } from "../../lib/supabaseClient";
-import moment from "moment"; // Import moment for date manipulation
 
 async function handler(req, res) {
   if (!supabase) {
@@ -10,23 +9,12 @@ async function handler(req, res) {
   if (req.method === "GET") {
     try {
       const userId = req.userId;
-      console.log("User ID:", userId);
-
-      const startOfMonth = moment().startOf("month").format("YYYY-MM-DD");
-      const endOfMonth = moment().endOf("month").format("YYYY-MM-DD");
+      console.log("User ID for get user data:", userId);
 
       const { data, error } = await supabase
-        .from("bills")
-        .select(
-          `
-        *,
-        users:user_id(id, user_name)
-      `
-        )
-        .eq("user_id", userId)
-        .gte("date_bill_created", startOfMonth)
-        .lte("date_bill_created", endOfMonth)
-        .order("id", { ascending: true });
+        .from("users")
+        .select("*")
+        .eq("id", userId);
 
       if (error) {
         console.error("Supabase error:", error);

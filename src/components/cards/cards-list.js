@@ -14,18 +14,18 @@ const CardsList = () => {
     loading,
   } = useContext(GlobalContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [displayedData, setDisplayedData] = useState(cards); // Default data
+  const [displayedData, setDisplayedData] = useState(cards);
 
   useEffect(() => {
     if (loading) {
       setIsLoading(true);
       const timer = setTimeout(() => {
         setIsLoading(false);
-        setDisplayedData(filteredData.length ? filteredData : cards); // Use filteredData or fallback to default cards
-      }, 2000); // Simulate 2-second transition delay
+        setDisplayedData(filteredData.length ? filteredData : cards); 
+      }, 2000); 
       return () => clearTimeout(timer);
     } else {
-      setDisplayedData(filteredData.length ? filteredData : cards); // Use filteredData or fallback to default cards
+      setDisplayedData(filteredData.length ? filteredData : cards); 
       setIsLoading(false);
     }
   }, [loading, filteredData, cards]);

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Nunito_Sans } from "next/font/google";
 import Header from "@/components/header/header";
 import Search from "@/components/search/search";
@@ -10,13 +10,24 @@ import CardsList from "@/components/cards/cards-list";
 import ModalAdd from "@/components/modals/modal-add";
 import GlobalContext from "@/context/globalContext";
 import { useAmount } from "@/hooks/useAmount"; // Import the custom hook
+import { useCurrentMonthYear } from "@/hooks/useCurrentMonthYear";
 
 const Nunito_Sans_init = Nunito_Sans({ subsets: ["latin"] });
 
 export default function Home() {
-  const { typeOfView, setTypeOfView, closeModal, openModal, showModal } =
-    useContext(GlobalContext);
-  const totalAmount = useAmount(); // Use the custom hook to get total amount
+  const {
+    typeOfView,
+    setTypeOfView,
+    closeModal,
+    openModal,
+    showModal,
+    formattedDate,
+    userdata: UserNameData,
+  } = useContext(GlobalContext);
+
+  const totalAmount = useAmount();
+  const currentMonth = useCurrentMonthYear();
+  const userName = (UserNameData && UserNameData.length > 0) ? UserNameData[0].user_name : "No User";
 
   console.log("Total amount in Home component:", totalAmount);
 
@@ -25,9 +36,8 @@ export default function Home() {
       className={`min-h-screen bg-gradient pt-12 ${Nunito_Sans_init.className}`}
     >
       <div className="container mx-auto flex flex-col space-y-20 px-28">
-        <Header />
+        <Header userName={userName} />
         <section className="mt-12 space-y-4">
-          <h1 className="text-8xl font-semibold mb-8">Search</h1>
           <div className="flex flex-row w-full gap-2">
             <Search />
             <div className="border border-white/10 rounded-lg flex flex-row">
@@ -44,7 +54,7 @@ export default function Home() {
           </div>
         </section>
         <section className="mt-12 space-y-4">
-          <h2 className=" text-2xl">January 2024</h2>
+          <h2 className=" text-2xl">{formattedDate || currentMonth} </h2>
           <CardsList typeOfView={typeOfView} />
         </section>
         <div className="relative h-20">
