@@ -57,7 +57,6 @@ const ButtonContextMenu = ({
   };
 
   const handleDeleteConfirm = () => {
-    console.log("Item deleted");
     setShowDeleteAlert(false);
     setMenuOpen(false);
   };
@@ -77,7 +76,6 @@ const ButtonContextMenu = ({
     try {
       await updateStatus(idOfBill, newStatus);
       updateCardStatus(idOfBill, newStatus);
-
       console.log(`Status updated to ${newStatus}`);
     } catch (error) {
       console.error("Error updating status:", error);

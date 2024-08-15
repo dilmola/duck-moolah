@@ -7,7 +7,6 @@ const useLogin = (username) => {
   useEffect(() => {
     const getLoginUser = async () => {
       if (!username) return;
-      console.log("Submitting username:", username);  // Log the username being submitted
 
       try {
         const response = await fetch("/api/login", {
@@ -19,7 +18,6 @@ const useLogin = (username) => {
         });
 
         const result = await response.json();
-        console.log(result);
         if (response.ok) {
           setData(result);
         } else {

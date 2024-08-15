@@ -16,7 +16,6 @@ const AlertDelete = ({ isOpen, onConfirm, onCancel, idOfBill }) => {
       await deleteBill(idOfBill);
       onConfirm();
       closeModal();
-      console.log(`Bill deleted`);
     } catch (error) {
       console.error("Error deleting bill:", error);
     }

@@ -4,7 +4,6 @@ import editBillIcon from "../../../public/icons/icon-edit.png";
 import FieldDatePicker from "@/components/field/field-datepicker";
 import Image from "next/image";
 import useFormValidation from "@/hooks/useFormValidation";
-import useUpdateDataBill from "@/hooks/useUpdateDataBill";
 import moment from "moment-timezone";
 import GlobalContext from "@/context/globalContext";
 
@@ -40,8 +39,6 @@ const ModalEdit = ({
 
   useEffect(() => {
     if (showModal) {
-      console.log("dueDateOfBill:", dueDateOfBill);
-
       setValues({
         name: nameOfBill || "",
         billType: typeAmount || "",
@@ -55,7 +52,6 @@ const ModalEdit = ({
 
   const handleFormSubmit = async () => {
     setResetKey((prevKey) => prevKey + 1);
-    console.log(values);
     onClose();
 
     try {
@@ -85,9 +81,7 @@ const ModalEdit = ({
   return (
     <div
       className={`fixed inset-0 flex justify-center items-center z-50  transition-all duration-100 transform ${
-        showModal
-          ? ""
-          : "opacity-0 -translate-y-4 pointer-events-none"
+        showModal ? "" : "opacity-0 -translate-y-4 pointer-events-none"
       }`}
       aria-hidden={!showModal}
       aria-modal="true"
@@ -105,7 +99,6 @@ const ModalEdit = ({
               />
             </div>
             <h2 className="text-xl font-semibold">Edit Bill Detail</h2>
-            <h2 className="text-xl font-semibold">{idOfBill}</h2>
           </div>
           <button
             className="cursor-pointer p-2 rounded-lg hover:rounded-3xl bg-black h-8 w-8"

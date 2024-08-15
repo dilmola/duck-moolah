@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Nunito_Sans } from "next/font/google";
 import Header from "@/components/header/header";
 import Search from "@/components/search/search";
 import ButtonView from "@/components/buttons/button-view/button-view";
@@ -9,10 +8,8 @@ import ButtonAdd from "@/components/buttons/button-add/button-add";
 import CardsList from "@/components/cards/cards-list";
 import ModalAdd from "@/components/modals/modal-add";
 import GlobalContext from "@/context/globalContext";
-import { useAmount } from "@/hooks/useAmount"; // Import the custom hook
+import { useAmount } from "@/hooks/useAmount";
 import { useCurrentMonthYear } from "@/hooks/useCurrentMonthYear";
-
-const Nunito_Sans_init = Nunito_Sans({ subsets: ["latin"] });
 
 export default function Home() {
   const {
@@ -27,17 +24,20 @@ export default function Home() {
 
   const totalAmount = useAmount();
   const currentMonth = useCurrentMonthYear();
-  const userName = (UserNameData && UserNameData.length > 0) ? UserNameData[0].user_name : "No User";
-
-  console.log("Total amount in Home component:", totalAmount);
+  const userName =
+    UserNameData && UserNameData.length > 0
+      ? UserNameData[0].user_name
+      : "No User";
 
   return (
-    <main
-      className={`min-h-screen bg-gradient pt-12 ${Nunito_Sans_init.className}`}
-    >
+    <main className="min-h-screen bg-gradient pt-12">
       <div className="container mx-auto flex flex-col space-y-20 px-28">
         <Header userName={userName} />
         <section className="mt-12 space-y-4">
+          <h2 className="text-5xl font-semibold">trace your bill here</h2>
+          <h3 className="text-2xl font-thin text-white/20">
+            find all your expenses and commitment only in one system
+          </h3>
           <div className="flex flex-row w-full gap-2">
             <Search />
             <div className="border border-white/10 rounded-lg flex flex-row">

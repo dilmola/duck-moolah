@@ -1,4 +1,3 @@
-// hooks/useUpdateStatus.js
 import { useState } from "react";
 
 const useUpdateStatus = (url) => {
@@ -25,8 +24,6 @@ const useUpdateStatus = (url) => {
         );
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
-      console.log("Status updated to:", newStatus);
     } catch (error) {
       console.error("Error updating status:", error);
       setUpdateError(error.message);

@@ -28,7 +28,5 @@ export function useAmount() {
     0
   );
 
-  console.log("Total amount from GlobalContext:", totalAmount);
-
   return totalAmount;
 }

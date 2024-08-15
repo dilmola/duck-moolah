@@ -46,6 +46,10 @@ export function GlobalProvider({ children }) {
     }
   };
 
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   const createData = async (newBill) => {
     setLoading(true);
     setSuccess(false);
@@ -139,11 +143,6 @@ export function GlobalProvider({ children }) {
       const data = await response.json();
       setSuccess(true);
       fetchData();
-      console.log(
-        "This runs immediately after fetchData() is called, not waiting for it to finish."
-      );
-
-      console.log("Bill updated", data);
     } catch (error) {
       console.error("Error updating status:", error);
       setError(error.message);
@@ -176,9 +175,7 @@ export function GlobalProvider({ children }) {
         );
       }
       const result = await response.json();
-
-      console.log("Delete successful");
-      fetchData(); // Re-fetch all data or search results
+      fetchData(); 
       return result;
     } catch (error) {
       console.error("Error deleting bill:", error);
@@ -226,7 +223,7 @@ export function GlobalProvider({ children }) {
   };
 
   const formatDate = (month, year) => {
-    const date = new Date(year, month - 1); // Months are 0-indexed
+    const date = new Date(year, month - 1); 
     return date.toLocaleString("default", { month: "long", year: "numeric" });
   };
 

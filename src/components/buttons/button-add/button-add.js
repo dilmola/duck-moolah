@@ -9,7 +9,7 @@ const ButtonAdd = () => {
   return (
     <div>
       <button
-        className="text-black bg-[#F7B267] px-6 py-2 rounded-lg font-semibold flex flex-row space-x-2 items-center"
+        className="text-black bg-[#F7B267] px-4 py-1 rounded-lg font-semibold flex flex-row space-x-2 items-center"
         onClick={openModal}
         aria-label="Add new card"
       >

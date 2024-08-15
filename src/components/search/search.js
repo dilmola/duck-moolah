@@ -4,14 +4,16 @@ import searchIcon from "../../../public/icons/icon-search.png";
 
 const Search = () => {
   const [query, setQuery] = useState("");
-  const { searchesData } = useContext(GlobalContext); 
+  const { searchesData } = useContext(GlobalContext);
 
   const handleChange = (event) => {
     setQuery(event.target.value);
   };
 
   const handleSearch = () => {
-    searchesData(query); 
+    if (query.trim() !== "") {
+      searchesData(query);
+    }
   };
 
   return (
@@ -20,7 +22,11 @@ const Search = () => {
         type="text"
         value={query}
         onChange={handleChange}
-        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && query.trim() !== "") {
+            handleSearch();
+          }
+        }}
         className="flex-grow px-4 py-2 bg-transparent border border-white/10 focus:outline-none h-fit w-full text-lg rounded-lg"
         placeholder="search here"
       />

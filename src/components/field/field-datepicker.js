@@ -49,7 +49,6 @@ const FieldDatePicker = ({ id, onChange, resetKey, name, selectedDate }) => {
     const malaysiaDate = moment.tz(date, "Asia/Kuala_Lumpur").toDate();
     setDate(malaysiaDate);
     onChange(malaysiaDate);
-    console.log(formatDateInMalaysiaTime(malaysiaDate));
   };
 
   const handleClose = (state) => {

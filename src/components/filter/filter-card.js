@@ -17,7 +17,6 @@ const FilterCard = () => {
 
   useEffect(() => {
     if (selectedYear && selectedMonth) {
-      console.log(`${selectedMonth}-${selectedYear}`);
       filterDataByDate(selectedMonth, selectedYear);
     }
   }, [selectedYear, selectedMonth, filterDataByDate]);

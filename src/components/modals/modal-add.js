@@ -31,9 +31,7 @@ const ModalAdd = () => {
 
   const handleFormSubmit = async () => {
     setResetKey((prevKey) => prevKey + 1);
-    console.log(values);
     resetValues();
-    console.log("successfull saveee");
     closeModal();
     try {
       const response = await createData({
@@ -45,8 +43,6 @@ const ModalAdd = () => {
         bill_amount: values.amount,
         status_bill: "pending",
       });
-      console.log(new Date());
-
       if (response.success) {
         ("sucesson server");
       }

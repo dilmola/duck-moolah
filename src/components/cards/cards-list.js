@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 
-import Card from "./card-large-item";
-import CardDetail from "@/components/cards/cards-detail-item";
+import CardLargeItem from "./card-large-item";
+import CardDetailItem from "@/components/cards/cards-detail-item";
 import GlobalContext from "@/context/globalContext";
 import { SkeletonLoaderCard } from "@/components/loader/loader-skeleton-card";
 
@@ -21,11 +21,11 @@ const CardsList = () => {
       setIsLoading(true);
       const timer = setTimeout(() => {
         setIsLoading(false);
-        setDisplayedData(filteredData.length ? filteredData : cards); 
-      }, 2000); 
+        setDisplayedData(filteredData.length ? filteredData : cards);
+      }, 2000);
       return () => clearTimeout(timer);
     } else {
-      setDisplayedData(filteredData.length ? filteredData : cards); 
+      setDisplayedData(filteredData.length ? filteredData : cards);
       setIsLoading(false);
     }
   }, [loading, filteredData, cards]);
@@ -51,9 +51,9 @@ const CardsList = () => {
     };
 
     return typeOfView === "cardsLargeItem" ? (
-      <Card key={index} {...cardProps} />
+      <CardLargeItem key={index} {...cardProps} />
     ) : (
-      <CardDetail key={index} {...cardProps} />
+      <CardDetailItem key={index} {...cardProps} />
     );
   });
 
