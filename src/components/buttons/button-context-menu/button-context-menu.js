@@ -128,7 +128,7 @@ const ButtonContextMenu = ({
               <a className="text-[#A7C957]">Paid</a>
             </div>
           )}
-          <div className={styles.dropdownItem}>
+          {/* <div className={styles.dropdownItem}>
             <Image
               src={viewIcon.src}
               height={16}
@@ -137,7 +137,7 @@ const ButtonContextMenu = ({
               alt="View icon"
             />
             <a href="#">View</a>
-          </div>
+          </div> */}
           <div onClick={openModal} className={styles.dropdownItem}>
             <Image
               src={editIcon.src}
