@@ -147,6 +147,7 @@ const ButtonContextMenu = ({
               <a href="#">View</a>
             </div>
           )}
+
           <div onClick={openModal} className={styles.dropdownItem}>
             <Image
               src={editIcon.src}
