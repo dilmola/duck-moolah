@@ -5,8 +5,8 @@ import ButtonView from "@/components/buttons/button-view/button-view";
 import ButtonSort from "@/components/buttons/button-sort/button-sort";
 import ButtonDownload from "@/components/buttons/button-download/button-download";
 import ButtonAdd from "@/components/buttons/button-add/button-add";
-import CardsList from "@/components/cards/cards-list";
-import ModalAdd from "@/components/modals/modal-add";
+import CardsList from "@/components/cards/card-list/cards-list";
+import ModalAdd from "@/components/modals/modal-add/modal-add";
 import GlobalContext from "@/context/globalContext";
 import { useAmount } from "@/hooks/useAmount";
 import { useCurrentMonthYear } from "@/hooks/useCurrentMonthYear";
@@ -59,7 +59,7 @@ export default function Home() {
         </section>
         <div className="relative h-20">
           <div className="fixed bottom-10 transform translate-x-[71rem] bg-black/10 backdrop-blur-sm p-4 rounded-lg flex flex-row space-x-2">
-            <div>Amount: RM </div> <div>{totalAmount}</div>
+            <div>Amount: RM</div> <div>{totalAmount}</div>
           </div>
         </div>
       </div>

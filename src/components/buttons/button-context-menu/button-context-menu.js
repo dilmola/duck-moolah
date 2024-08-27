@@ -10,6 +10,7 @@ import AlertDelete from "@/components/alert/alert-delete";
 import useUpdateStatusBill from "@/hooks/useUpdateStatusBill";
 import Image from "next/image";
 import GlobalContext from "@/context/globalContext";
+import { useRouter } from "next/router";
 
 const ButtonContextMenu = ({
   idOfBill,
@@ -24,6 +25,7 @@ const ButtonContextMenu = ({
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const { updateStatus } = useUpdateStatusBill("/api/update-status-bill");
   const { updateCardStatus } = useContext(GlobalContext);
+  const router = useRouter(); // Initialize the router
 
   const openModal = (event) => {
     event.stopPropagation();
@@ -84,6 +86,11 @@ const ButtonContextMenu = ({
     setMenuOpen(false);
   };
 
+  const handleViewClick = (event) => {
+    event.stopPropagation();
+    router.push(`/home/bill-detail/${idOfBill}`);
+  };
+
   return (
     <div
       className={`${styles.menuContainer} ${menuOpen ? styles.menuOpen : ""}`}
@@ -128,16 +135,18 @@ const ButtonContextMenu = ({
               <a className="text-[#A7C957]">Paid</a>
             </div>
           )}
-          <div className={styles.dropdownItem}>
-            <Image
-              src={viewIcon.src}
-              height={16}
-              width={16}
-              className={styles.iconItem}
-              alt="View icon"
-            />
-            <a href="#">View</a>
-          </div>
+          {typeAmount === "dynamic" && (
+            <div className={styles.dropdownItem} onClick={handleViewClick}>
+              <Image
+                src={viewIcon.src}
+                height={16}
+                width={16}
+                className={styles.iconItem}
+                alt="View icon"
+              />
+              <a href="#">View</a>
+            </div>
+          )}
           <div onClick={openModal} className={styles.dropdownItem}>
             <Image
               src={editIcon.src}

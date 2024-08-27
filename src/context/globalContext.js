@@ -6,7 +6,9 @@ export function GlobalProvider({ children }) {
   const [typeOfView, setTypeOfView] = useState(null);
   const [userdata, setUserData] = useState([]);
   const [data, setData] = useState([]);
+  const [previousdata, setPreviousData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [chartdata, setChartData] = useState([]);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -84,6 +86,39 @@ export function GlobalProvider({ children }) {
     }
   };
 
+  const createDataBillPreviousMonth = async (newBill) => {
+    setLoading(true);
+    setSuccess(false);
+    setError(null);
+    const createDataUrl = "/api/create-data-bill-previousmonth";
+    try {
+      const response = await fetch(createDataUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newBill),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(
+          `HTTP error! Status: ${response.status}, Response: ${errorText}`
+        );
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setSuccess(true);
+      return result;
+    } catch (error) {
+      console.error("Error creating data:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchData = async () => {
     setLoading(true);
     setError(null);
@@ -118,6 +153,69 @@ export function GlobalProvider({ children }) {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const fetchDataPreviousBill = async () => {
+    setLoading(true);
+    setError(null);
+
+    const getDataPreviousMonthUrl = "/api/get-data-bills-previousmonth";
+    try {
+      const response = await fetch(getDataPreviousMonthUrl);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(
+          `HTTP error! Status: ${response.status}, Response: ${errorText}`
+        );
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      console.log("Raw response:", response);
+
+      const result = await response.json();
+
+      console.log("Fetched data:", result);
+
+      setPreviousData(result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDataPreviousBill();
+  }, []);
+
+  const getIdDataChartBills = async (id) => {
+    console.log("Fetching data for Bill ID:", id); // Log the ID before the API call
+
+    setLoading(true);
+    setError(null);
+    setChartData([]);
+
+    const getIdDataChartBillsUrl = `/api/get-data-bills-chart?id=${id}`; // Pass the id (slug) as a query parameter
+    try {
+      const response = await fetch(getIdDataChartBillsUrl);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(
+          `HTTP error! Status: ${response.status}, Response: ${errorText}`
+        );
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      console.log("Raw response:", response);
+
+      const result = await response.json();
+      console.log(result);
+      setChartData(result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const updateBill = async (idOfBill, billProps) => {
     setLoading(true);
@@ -175,7 +273,7 @@ export function GlobalProvider({ children }) {
         );
       }
       const result = await response.json();
-      fetchData(); 
+      fetchData();
       return result;
     } catch (error) {
       console.error("Error deleting bill:", error);
@@ -223,7 +321,7 @@ export function GlobalProvider({ children }) {
   };
 
   const formatDate = (month, year) => {
-    const date = new Date(year, month - 1); 
+    const date = new Date(year, month - 1);
     return date.toLocaleString("default", { month: "long", year: "numeric" });
   };
 
@@ -290,6 +388,7 @@ export function GlobalProvider({ children }) {
         openModal,
         showModal,
         createData,
+        createDataBillPreviousMonth,
         error,
         loading,
         success,
@@ -301,7 +400,11 @@ export function GlobalProvider({ children }) {
         filterDataByDate,
         formattedDate,
         userdata,
+        getIdDataChartBills,
+        chartdata,
         fetchUsers,
+        fetchDataPreviousBill,
+        previousdata,
       }}
     >
       {children}
