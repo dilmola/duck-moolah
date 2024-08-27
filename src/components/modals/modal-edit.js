@@ -3,7 +3,7 @@ import CloseIcon from "../../../public/icons/icon-close.png";
 import editBillIcon from "../../../public/icons/icon-edit.png";
 import FieldDatePicker from "@/components/field/field-datepicker";
 import Image from "next/image";
-import useFormValidation from "@/hooks/useFormValidation";
+import useFormBillEditValidation from "@/hooks/useFormEditBillValidation";
 import moment from "moment-timezone";
 import GlobalContext from "@/context/globalContext";
 
@@ -35,7 +35,7 @@ const ModalEdit = ({
     handleSubmit,
     resetValues,
     setValues,
-  } = useFormValidation(initialFormValues);
+  } = useFormBillEditValidation(initialFormValues);
 
   useEffect(() => {
     if (showModal) {

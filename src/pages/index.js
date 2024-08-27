@@ -8,7 +8,8 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const router = useRouter();
   const { data: loginData, error: loginError } = useLogin(username);
-  const { fetchData } = useContext(GlobalContext);
+  const { fetchData, fetchUsers, fetchDataPreviousBill } =
+    useContext(GlobalContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -20,6 +21,8 @@ export default function Login() {
     if (loginData) {
       router.push("/home");
       fetchData();
+      fetchUsers();
+      fetchDataPreviousBill();
     }
   }, [loginData, router, fetchData]);
 

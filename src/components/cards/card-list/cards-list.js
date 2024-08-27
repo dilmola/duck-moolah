@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 
 import CardLargeItem from "./card-large-item";
-import CardDetailItem from "@/components/cards/cards-detail-item";
+import CardDetailItem from "@/components/cards/card-list/cards-detail-item";
 import GlobalContext from "@/context/globalContext";
 import { SkeletonLoaderCard } from "@/components/loader/loader-skeleton-card";
 

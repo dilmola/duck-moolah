@@ -14,58 +14,59 @@ async function handler(req, res) {
     try {
       const userId = req.userId;
       console.log("User ID for create:", userId);
+      console.log("previousmonth", userId);
 
-      const { type_of_bill, name_of_bill, due_date, bill_amount, status_bill } =
-        req.body;
+      const {
+        type_of_bill,
+        name_of_bill,
+        due_date,
+        bill_amount,
+        status_bill,
+        previous_month_id,
+        previous_month_id_exist,
+        typeofbill,
+      } = req.body;
 
-      if (!type_of_bill || !name_of_bill || !due_date || !bill_amount) {
+      if (!name_of_bill || !due_date || !bill_amount) {
         return res.status(400).json({ error: "All fields are required" });
       }
 
       console.log({
         type_of_bill,
         name_of_bill,
-        due_date,
         bill_amount,
         status_bill,
+        due_date,
+        previous_month_id,
+        previous_month_id_exist,
       });
+
+      let finalPreviousMonthId = previous_month_id_exist;
+
+      if (!previous_month_id_exist) {
+        finalPreviousMonthId = previous_month_id;
+      }
 
       const dateBillCreated = moment().tz("Asia/Kuala_Lumpur").format();
       console.log(dateBillCreated);
 
-      // Insert the bill and get the inserted record's ID
-      const { data, error } = await supabase
-        .from("bills")
-        .insert([
-          {
-            type_of_bill: type_of_bill,
-            name_of_bill: name_of_bill,
-            due_date: due_date,
-            bill_amount: bill_amount,
-            status_bill: status_bill || "pending",
-            user_id: userId,
-            date_bill_created: dateBillCreated,
-          },
-        ])
-        .select("id");
+      const { data, error } = await supabase.from("bills").insert([
+        {
+          name_of_bill: name_of_bill,
+          bill_amount: bill_amount,
+          status_bill: status_bill || "pending",
+          user_id: userId,
+          due_date: due_date,
+
+          date_bill_created: dateBillCreated,
+          previous_month_id: finalPreviousMonthId,
+          type_of_bill: typeofbill,
+        },
+      ]);
 
       if (error) throw error;
 
       console.log("Data inserted:", data);
-
-      if (type_of_bill === "dynamic") {
-        const billId = data[0].id;
-
-        const { error: updateError } = await supabase
-          .from("bills")
-          .update({ previous_month_id: billId })
-          .eq("id", billId);
-
-        if (updateError) throw updateError;
-
-        console.log("Updated record with previous_month_id:", billId);
-      }
-
       return res.status(200).json({ message: "Bill added successfully", data });
     } catch (error) {
       console.error("Error inserting data:", error);
