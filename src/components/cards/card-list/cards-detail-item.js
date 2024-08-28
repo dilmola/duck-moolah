@@ -5,6 +5,7 @@ const CardDetailItem = ({
   idOfBill,
   typeAmount,
   nameOfBill,
+  dateBillCreated,
   dueDateOfBill,
   amountOfBill,
   statusOfBill,
@@ -42,6 +43,7 @@ const CardDetailItem = ({
           idOfBill={idOfBill}
           typeAmount={typeAmount}
           nameOfBill={nameOfBill}
+          dateBillCreated={dateBillCreated}
           dueDateOfBill={dueDateOfBill}
           amountOfBill={amountOfBill}
         />

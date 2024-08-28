@@ -1,6 +1,6 @@
 import authMiddleware from "../../../authMiddleware";
 import { supabase } from "../../lib/supabaseClient";
-import moment from "moment"; // Import moment for date manipulation
+import moment from "moment"; 
 
 async function handler(req, res) {
   if (!supabase) {

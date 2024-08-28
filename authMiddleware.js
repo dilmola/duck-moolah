@@ -7,9 +7,6 @@ export default function authMiddleware(handler) {
   return async (req, res) => {
     const cookies = cookie.parse(req.headers.cookie || "");
     const token = cookies.token; 
-
-    console.log("Extracted token from cookies:", cookies);
-
     if (!token) {
       return res.status(401).json({ error: "Unauthorized: No token provided" });
     }

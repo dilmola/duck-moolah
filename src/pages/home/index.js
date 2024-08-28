@@ -34,9 +34,12 @@ export default function Home() {
       <div className="container mx-auto flex flex-col space-y-20 px-28">
         <Header userName={userName} />
         <section className="mt-12 space-y-4">
-          <h2 className="text-5xl font-semibold">trace your bill here</h2>
+          <h2 className="text-5xl font-semibold">
+            Keep Track of Your Bills Here
+          </h2>
           <h3 className="text-2xl font-thin text-white/20">
-            find all your expenses and commitment only in one system
+            manage all your expenses and bills in One-stop platform. Everything you need to stay
+            on top of your finances is right here, in one place
           </h3>
           <div className="flex flex-row w-full gap-2">
             <Search />

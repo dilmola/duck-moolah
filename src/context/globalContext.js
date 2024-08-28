@@ -76,7 +76,7 @@ export function GlobalProvider({ children }) {
 
       const result = await response.json();
       setSuccess(true);
-      fetchData(); // Fetch the updated data after creation
+      fetchData();
       return result;
     } catch (error) {
       console.error("Error creating data:", error);
@@ -168,12 +168,7 @@ export function GlobalProvider({ children }) {
         );
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      console.log("Raw response:", response);
-
       const result = await response.json();
-
-      console.log("Fetched data:", result);
-
       setPreviousData(result);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -188,8 +183,6 @@ export function GlobalProvider({ children }) {
   }, []);
 
   const getIdDataChartBills = async (id) => {
-    console.log("Fetching data for Bill ID:", id); // Log the ID before the API call
-
     setLoading(true);
     setError(null);
     setChartData([]);
@@ -204,10 +197,7 @@ export function GlobalProvider({ children }) {
         );
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      console.log("Raw response:", response);
-
       const result = await response.json();
-      console.log(result);
       setChartData(result);
     } catch (error) {
       console.error("Error fetching data:", error);

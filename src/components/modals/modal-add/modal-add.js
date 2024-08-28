@@ -58,7 +58,6 @@ const ModalAdd = () => {
       ? moment(newBillFormValues.dueDate).format("YYYY-MM-DD")
       : null;
 
-    console.log("Formatted Due Date:", formattedDueDate);
     try {
       const response = await createData({
         type_of_bill: newBillFormValues.billType,
@@ -69,9 +68,6 @@ const ModalAdd = () => {
         bill_amount: newBillFormValues.amount,
         status_bill: "pending",
       });
-      if (response.success) {
-        console.log("Success on server");
-      }
     } catch (error) {
       console.error("Error creating bill:", error);
     }
@@ -86,8 +82,6 @@ const ModalAdd = () => {
           "YYYY-MM-DD"
         )
       : null;
-
-    console.log("Formatted Due Date:", formattedDueDate);
     try {
       const response = await createDataBillPreviousMonth({
         name_of_bill: previousBillFormValues.name,
@@ -102,9 +96,6 @@ const ModalAdd = () => {
         previous_month_id_exist: previousBillFormValues.previousmonthid,
         typeofbill: previousBillFormValues.typeofbill,
       });
-      if (response.success) {
-        console.log("Success on server");
-      }
     } catch (error) {
       console.error("Error creating bill:", error);
     }

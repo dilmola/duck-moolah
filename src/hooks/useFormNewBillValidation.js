@@ -47,16 +47,11 @@ const useFormNewBillValidation = (initialValues) => {
 
   const handleSubmit = (callback) => (e) => {
     e.preventDefault();
-    console.log("handleSubmit function triggered");
-
     const validationErrors = validate(values);
-    console.log("Validation Errors:", validationErrors);
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
       setErrors({});
-      console.log("No validation errors, calling callback function");
       callback();
     }
   };

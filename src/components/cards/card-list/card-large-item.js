@@ -6,6 +6,7 @@ const CardLargeItem = ({
   typeAmount,
   nameOfBill,
   dueDateOfBill,
+  dateBillCreated,
   amountOfBill,
   statusOfBill,
 }) => {
@@ -26,6 +27,7 @@ const CardLargeItem = ({
             idOfBill={idOfBill}
             typeAmount={typeAmount}
             nameOfBill={nameOfBill}
+            dateBillCreated={dateBillCreated}
             dueDateOfBill={dueDateOfBill}
             amountOfBill={amountOfBill}
           />

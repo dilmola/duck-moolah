@@ -31,8 +31,8 @@ const ModalAddPreviousMonth = ({
     const dueDatePlusOneMonth = dueDate
       ? moment(dueDate, "YYYY-MM-DD").add(1, "month").format("DD/MM/YYYY")
       : null;
-    console.log("Selected Due Date:", dueDate);
-    setPreviousBillFormValues((prevValues) => ({
+
+      setPreviousBillFormValues((prevValues) => ({
       ...prevValues,
       category,
       dueDate: dueDatePlusOneMonth,
@@ -51,10 +51,6 @@ const ModalAddPreviousMonth = ({
       previousmonthid,
     };
 
-    // Log the new values
-    console.log("Updated Form Values:", newValues);
-
-    // Update the state with the new values
     setPreviousBillFormValues(newValues);
     setIsOpen(false);
   };

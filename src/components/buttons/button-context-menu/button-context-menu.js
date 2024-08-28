@@ -17,6 +17,7 @@ const ButtonContextMenu = ({
   typeAmount,
   nameOfBill,
   dueDateOfBill,
+  dateBillCreated,
   amountOfBill,
   statusOfBill,
 }) => {
@@ -25,7 +26,13 @@ const ButtonContextMenu = ({
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const { updateStatus } = useUpdateStatusBill("/api/update-status-bill");
   const { updateCardStatus } = useContext(GlobalContext);
-  const router = useRouter(); // Initialize the router
+  const router = useRouter(); 
+
+  const dateBillCreatedFilter = new Date(dateBillCreated); 
+  const currentMonth = new Date().getMonth(); 
+  const currentYear = new Date().getFullYear(); 
+  const billMonth = dateBillCreatedFilter.getMonth(); 
+  const billYear = dateBillCreatedFilter.getFullYear(); 
 
   const openModal = (event) => {
     event.stopPropagation();
@@ -78,7 +85,6 @@ const ButtonContextMenu = ({
     try {
       await updateStatus(idOfBill, newStatus);
       updateCardStatus(idOfBill, newStatus);
-      console.log(`Status updated to ${newStatus}`);
     } catch (error) {
       console.error("Error updating status:", error);
     }
@@ -135,19 +141,20 @@ const ButtonContextMenu = ({
               <a className="text-[#A7C957]">Paid</a>
             </div>
           )}
-          {typeAmount === "dynamic" && (
-            <div className={styles.dropdownItem} onClick={handleViewClick}>
-              <Image
-                src={viewIcon.src}
-                height={16}
-                width={16}
-                className={styles.iconItem}
-                alt="View icon"
-              />
-              <a href="#">View</a>
-            </div>
-          )}
-
+          {typeAmount === "dynamic" &&
+            currentMonth === billMonth &&
+            currentYear === billYear && (
+              <div className={styles.dropdownItem} onClick={handleViewClick}>
+                <Image
+                  src={viewIcon.src}
+                  height={16}
+                  width={16}
+                  className={styles.iconItem}
+                  alt="View icon"
+                />
+                <a href="#">View</a>
+              </div>
+            )}
           <div onClick={openModal} className={styles.dropdownItem}>
             <Image
               src={editIcon.src}

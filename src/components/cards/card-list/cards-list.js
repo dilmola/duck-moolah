@@ -44,6 +44,7 @@ const CardsList = () => {
     const cardProps = {
       typeAmount: card.type_of_bill,
       nameOfBill: card.name_of_bill,
+      dateBillCreated: card.date_bill_created,
       dueDateOfBill: card.due_date,
       amountOfBill: card.bill_amount,
       statusOfBill: card.status_bill,
