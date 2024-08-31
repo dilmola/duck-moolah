@@ -140,6 +140,7 @@ export function GlobalProvider({ children }) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const result = await response.json();
+      console.log("test:", result);
       setData(result);
       setFilteredData(result);
     } catch (error) {
@@ -390,6 +391,7 @@ export function GlobalProvider({ children }) {
         filterDataByDate,
         formattedDate,
         userdata,
+        setData,
         getIdDataChartBills,
         chartdata,
         fetchUsers,

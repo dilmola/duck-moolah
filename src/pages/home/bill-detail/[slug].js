@@ -4,7 +4,9 @@ import { useRouter } from "next/router"; // Import useRouter
 import Header from "@/components/header/header";
 import GlobalContext from "@/context/globalContext";
 import BarChart from "@/components/chart/chart-bar";
-import CardChart from "@/components/cards/card-chart/card-chart"; // Import the Card component
+import CardSummary from "@/components/cards/card-summary/card-summary"; // Import the Card component
+import UpImg from "../../../../public/icons/icon-up.png";
+import DownImg from "../../../../public/icons/icon-down.png";
 
 export default function BillDetail() {
   const router = useRouter();
@@ -64,13 +66,19 @@ export default function BillDetail() {
             <h3 className="text-gray-500/50">name of bill</h3>
             <a className="text-2xl">{firstBillName}</a>
             <div className="space-x-4 flex flex-row">
-              <CardChart
-                title="Percentage Increase"
-                percentage={percentageIncrease}
+              <CardSummary
+                title="percentage Increase"
+                summary={percentageIncrease}
+                imgsrc={UpImg.src}
+                titleDetail="percentage increasing of that newest month"
+                imgalt="percentage increase"
               />
-              <CardChart
-                title="Percentage Decrease"
-                percentage={percentageDecrease}
+              <CardSummary
+                title="percentage decrease"
+                summary={percentageDecrease}
+                imgsrc={DownImg.src}
+                titleDetail="percentage decreasing of that newest month"
+                imgalt="percentage decrease"
               />
             </div>
           </section>

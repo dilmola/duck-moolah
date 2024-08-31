@@ -28,5 +28,5 @@ export function useAmount() {
     0
   );
 
-  return parseFloat(totalAmount.toFixed(2));
+  return `RM ${totalAmount.toFixed(2)}`;
 }

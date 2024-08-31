@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "@/components/header/header";
 import Search from "@/components/search/search";
 import ButtonView from "@/components/buttons/button-view/button-view";
@@ -10,6 +10,9 @@ import ModalAdd from "@/components/modals/modal-add/modal-add";
 import GlobalContext from "@/context/globalContext";
 import { useAmount } from "@/hooks/useAmount";
 import { useCurrentMonthYear } from "@/hooks/useCurrentMonthYear";
+import CardSummary from "@/components/cards/card-summary/card-summary"; // Import the Card component
+import AmountImg from "../../../public/icons/icon-amount.png";
+import StatusPaidImg from "../../../public/icons/icon-statuspaid.png";
 
 export default function Home() {
   const {
@@ -20,6 +23,7 @@ export default function Home() {
     showModal,
     formattedDate,
     userdata: UserNameData,
+    data: setAllData,
   } = useContext(GlobalContext);
 
   const totalAmount = useAmount();
@@ -28,6 +32,24 @@ export default function Home() {
     UserNameData && UserNameData.length > 0
       ? UserNameData[0].user_name
       : "No User";
+
+  const [paidBillsCount, setPaidBillsCount] = useState(0);
+
+  useEffect(() => {
+    // Assuming setAllData stores the bills data
+    if (setAllData) {
+      // Filter and count bills with status_bill as 'paid'
+      const paidBills = setAllData.filter(
+        (bill) => bill.status_bill === "paid"
+      );
+      setPaidBillsCount(paidBills.length);
+    }
+  }, [setAllData]);
+
+  useEffect(() => {
+    // Logging the setAllData function to see what it contains
+    console.log("setAllData function:", setAllData);
+  }, [setAllData]);
 
   return (
     <main className="min-h-screen bg-gradient pt-12">
@@ -38,8 +60,8 @@ export default function Home() {
             Keep Track of Your Bills Here
           </h2>
           <h3 className="text-2xl font-thin text-white/20">
-            manage all your expenses and bills in One-stop platform. Everything you need to stay
-            on top of your finances is right here, in one place
+            manage all your expenses and bills in One-stop platform. Everything
+            you need to stay on top of your finances is right here, in one place
           </h3>
           <div className="flex flex-row w-full gap-2">
             <Search />
@@ -56,15 +78,26 @@ export default function Home() {
             <ButtonAdd openModal={openModal} />
           </div>
         </section>
+        <section className="flex flex-row space-x-4">
+          <CardSummary
+            title="amount"
+            summary={totalAmount}
+            imgsrc={AmountImg.src}
+            titleDetail="amount of total of bills"
+            imgalt="amount total bills"
+          />
+          <CardSummary
+            title="bills paid"
+            summary={paidBillsCount}
+            imgsrc={StatusPaidImg.src}
+            titleDetail="total status paid of bills"
+            imgalt="total paid bills"
+          />
+        </section>
         <section className="mt-12 space-y-4">
-          <h2 className=" text-2xl">{formattedDate || currentMonth} </h2>
+          <h2 className="text-2xl">{formattedDate || currentMonth} </h2>
           <CardsList typeOfView={typeOfView} />
         </section>
-        <div className="relative h-20">
-          <div className="fixed bottom-10 transform translate-x-[71rem] bg-black/10 backdrop-blur-sm p-4 rounded-lg flex flex-row space-x-2">
-            <div>Amount: RM</div> <div>{totalAmount}</div>
-          </div>
-        </div>
       </div>
       <ModalAdd openModal={showModal} closeModal={closeModal} />
     </main>

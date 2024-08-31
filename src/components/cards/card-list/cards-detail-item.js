@@ -17,7 +17,6 @@ const CardDetailItem = ({
       <div
         className={`w-2 h-2 rounded-full ${dotStyle} ${styles.pulse} mr-2`}
       ></div>
-      <span className="flex-1 font-thin text-white/60">{typeAmount} bill</span>
       <section className="flex-1">{nameOfBill}</section>
       <section className="flex-1">{dueDateOfBill}</section>
       <section className="flex-1">RM {amountOfBill}</section>
