@@ -36,9 +36,7 @@ export default function Home() {
   const [paidBillsCount, setPaidBillsCount] = useState(0);
 
   useEffect(() => {
-    // Assuming setAllData stores the bills data
     if (setAllData) {
-      // Filter and count bills with status_bill as 'paid'
       const paidBills = setAllData.filter(
         (bill) => bill.status_bill === "paid"
       );
@@ -47,19 +45,18 @@ export default function Home() {
   }, [setAllData]);
 
   useEffect(() => {
-    // Logging the setAllData function to see what it contains
     console.log("setAllData function:", setAllData);
   }, [setAllData]);
 
   return (
     <main className="min-h-screen bg-gradient pt-12 pb-40">
-      <div className="container mx-auto flex flex-col space-y-20 px-28">
+      <div className="container mx-auto flex flex-col space-y-20 md:px-28 px-8">
         <Header userName={userName} />
         <section className="mt-12 space-y-4">
-          <h2 className="text-5xl font-semibold">
+          <h2 className="md:text-5xl text-4xl font-semibold">
             Keep Track of Your Bills Here
           </h2>
-          <h3 className="text-2xl font-thin text-white/20">
+          <h3 className="md:text-2xl text-xl font-thin text-white/20">
             manage all your expenses and bills in One-stop platform. Everything
             you need to stay on top of your finances is right here, in one place
           </h3>
@@ -78,7 +75,7 @@ export default function Home() {
             <ButtonAdd openModal={openModal} />
           </div>
         </section>
-        <section className="flex flex-row space-x-4">
+        <section className="flex md:flex-row flex-col md:space-x-4 space-y-2">
           <CardSummary
             title="amount"
             summary={totalAmount}

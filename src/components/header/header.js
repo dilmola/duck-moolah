@@ -10,15 +10,15 @@ function Header({ userName }) {
 
   return (
     <div className="bg-[#0a0a0a] w-full py-4 mx-auto rounded-lg shadow-md">
-      <div className="px-8">
-        <div className="flex items-center justify-between">
+      <div className="px-4 md:px-8">
+        <div className="flex md:items-center md:justify-between md:flex-row flex-col md:space-y-0 space-y-4">
           <img
             src={Logo.src}
             alt="Logo"
-            className="h-6 cursor-pointer" 
+            className="h-6 cursor-pointer object-contain" 
             onClick={handleLogoClick}
           />
-          <div className="flex flex-row space-x-6 items-center">
+          <div className="flex md:flex-row justify-between space-x-6 items-center">
             <h1>Welcome, {userName} !</h1>
             <ButtonLogout />
           </div>

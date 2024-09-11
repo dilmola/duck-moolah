@@ -9,7 +9,7 @@ import InstructionModal from "@/components/modals/modal-instruction";
 
 export default function Login() {
   const [username, setUsername] = useState("");
-  const [showModal, setShowModal] = useState(true); 
+  const [showModal, setShowModal] = useState(true);
   const router = useRouter();
   const { data: loginData, error: loginError } = useLogin(username);
   const { fetchData, fetchUsers, fetchDataPreviousBill } =
@@ -41,8 +41,8 @@ export default function Login() {
   ]);
 
   return (
-    <main className="grid grid-cols-5 min-h-screen ">
-      <div className="col-span-3 flex justify-center h-screen items-center p-4 rounded-lg overflow-hidden relative">
+    <main className="grid grid-cols-1 md:grid-cols-5 min-h-screen">
+      <div className="md:col-span-3 flex justify-center md:h-screen h-4/5 items-center p-4 rounded-lg overflow-hidden relative">
         <img
           src={LoginImg.src}
           alt="Login Img"
@@ -54,7 +54,7 @@ export default function Login() {
           className="h-8 absolute top-10 left-10"
         />
       </div>
-      <div className="flex flex-col min-h-screen col-span-2 p-4">
+      <div className="flex flex-col md:min-h-screen h-max col-span-2 p-4">
         <div className="flex-grow flex items-center justify-center">
           <form
             onSubmit={handleLogin}
@@ -62,7 +62,7 @@ export default function Login() {
           >
             <div className="items-center justify-center flex flex-col">
               <h1 className="text-4xl font-semibold">Welcome</h1>
-              <h2 className="font-thin text-gray-300/80">
+              <h2 className="font-thin text-gray-300/80 text-center">
                 welcome to Expense Tracker - about duit akan habis!
               </h2>
             </div>

@@ -70,7 +70,7 @@ const CardsList = () => {
                 ? "opacity-100"
                 : "opacity-0 pointer-events-none"
             } ${
-              typeOfView === "cardsLargeItem" ? "grid grid-cols-3 gap-6" : ""
+              typeOfView === "cardsLargeItem" ? "grid md:grid-cols-3 grid-rows-1 gap-6" : ""
             }`}
           >
             {typeOfView === "cardsLargeItem" && mapOfCards}

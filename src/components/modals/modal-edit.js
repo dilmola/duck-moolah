@@ -115,7 +115,7 @@ const ModalEdit = ({
           </button>
         </header>
         <main className="p-6">
-          <form className="space-y-4">
+          <form className="md:space-y-4 space-y-8">
             <div className="space-y-2">
               <label htmlFor="bill-name" className="text-white/60">
                 Name of Bill
@@ -138,7 +138,7 @@ const ModalEdit = ({
             </div>
             <fieldset className="space-y-2">
               <legend className="text-white/60">Type of Bill</legend>
-              <div className="flex flex-row space-x-2">
+              <div className="flex md:flex-row md:space-x-2 flex-col space-y-4 md:space-y-0">
                 <div className="flex-1">
                   <button
                     type="button"
@@ -170,7 +170,7 @@ const ModalEdit = ({
                 <p className="text-red-500 text-sm">{errors.billType}</p>
               )}
             </fieldset>
-            <div className="flex flex-row space-x-2">
+            <div className="flex md:flex-row md:space-x-2 flex-col space-y-4 md:space-y-0">
               <div className="space-y-2 flex flex-col flex-1">
                 <label htmlFor="due-date" className="text-white/60">
                   Due Date

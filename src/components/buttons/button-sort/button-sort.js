@@ -25,11 +25,11 @@ const ButtonSort = () => {
 
   return (
     <div className="relative flex items-center" ref={dropdownRef}>
-      <button className="px-4" onClick={toggleDropdown}>
+      <button className="md:px-4 px-2" onClick={toggleDropdown}>
         <img
           src={ViewIcon.src}
           alt="icon"
-          className="h-4 w-4 object-contain cursor-pointer opacity-30 hover:opacity-100 transition-opacity duration-200"
+          className="md:h-4 md:w-4 h-6 w-6 object-contain cursor-pointer opacity-30 hover:opacity-100 transition-opacity duration-200"
         />
       </button>
       <div

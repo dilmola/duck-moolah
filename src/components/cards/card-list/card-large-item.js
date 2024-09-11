@@ -32,7 +32,7 @@ const CardLargeItem = ({
             amountOfBill={amountOfBill}
           />
         </div>
-        <div className="text-2xl mb-16">{nameOfBill}</div>
+        <div className="text-2xl md:mb-16 mb-8">{nameOfBill}</div>
         <div className="flex justify-between">
           <div className="flex flex-col">
             <a>
