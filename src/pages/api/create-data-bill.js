@@ -53,19 +53,18 @@ async function handler(req, res) {
 
       console.log("Data inserted:", data);
 
-      if (type_of_bill === "dynamic") {
-        const billId = data[0].id;
+      const billId = data[0].id;
 
-        const { error: updateError } = await supabase
-          .from("bills")
-          .update({ previous_month_id: billId })
-          .eq("id", billId);
+      const { error: updateError } = await supabase
+        .from("bills")
+        .update({ previous_month_id: billId }) // Update the same record with its own ID
+        .eq("id", billId);
 
-        if (updateError) throw updateError;
+      if (updateError) throw updateError;
 
-        console.log("Updated record with previous_month_id:", billId);
-      }
+      console.log("Updated record with previous_month_id:", billId);
 
+      // Return a successful response with the data
       return res.status(200).json({ message: "Bill added successfully", data });
     } catch (error) {
       console.error("Error inserting data:", error);

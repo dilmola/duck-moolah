@@ -1,6 +1,6 @@
 import { supabase } from "../../lib/supabaseClient";
 import jwt from "jsonwebtoken";
-import cookie from "cookie"; // Import the cookie library
+import cookie from "cookie";
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -29,22 +29,18 @@ export default async function handler(req, res) {
         return res.status(401).json({ error: "Invalid username" });
       }
 
-      // Create a JWT token manually
       const token = jwt.sign({ id: users.id }, JWT_SECRET, { expiresIn: "1d" });
 
-      // Log the token to the console (optional, for debugging)
       console.log("Generated token:", token);
 
-      // Set the token in a cookie
       res.setHeader(
         "Set-Cookie",
         cookie.serialize("token", token, {
-          // Use "token" as the cookie name
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production", // Set to true in production for HTTPS
-          maxAge: 60 * 60 * 24, // 1 day
+          secure: process.env.NODE_ENV === "production", 
+          maxAge: 60 * 60 * 24,
           sameSite: "strict",
-          path: "/", // Path where the cookie is valid
+          path: "/",
         })
       );
 

@@ -26,13 +26,13 @@ const ButtonContextMenu = ({
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const { updateStatus } = useUpdateStatusBill("/api/update-status-bill");
   const { updateCardStatus } = useContext(GlobalContext);
-  const router = useRouter(); 
+  const router = useRouter();
 
-  const dateBillCreatedFilter = new Date(dateBillCreated); 
-  const currentMonth = new Date().getMonth(); 
-  const currentYear = new Date().getFullYear(); 
-  const billMonth = dateBillCreatedFilter.getMonth(); 
-  const billYear = dateBillCreatedFilter.getFullYear(); 
+  const dateBillCreatedFilter = new Date(dateBillCreated);
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+  const billMonth = dateBillCreatedFilter.getMonth();
+  const billYear = dateBillCreatedFilter.getFullYear();
 
   const openModal = (event) => {
     event.stopPropagation();
@@ -155,16 +155,18 @@ const ButtonContextMenu = ({
                 <a href="#">View</a>
               </div>
             )}
-          <div onClick={openModal} className={styles.dropdownItem}>
-            <Image
-              src={editIcon.src}
-              height={16}
-              width={16}
-              className={styles.iconItem}
-              alt="Edit icon"
-            />
-            <a>Edit</a>
-          </div>
+          {currentMonth === billMonth && currentYear === billYear && (
+            <div onClick={openModal} className={styles.dropdownItem}>
+              <Image
+                src={editIcon.src}
+                height={16}
+                width={16}
+                className={styles.iconItem}
+                alt="Edit icon"
+              />
+              <a>Edit</a>
+            </div>
+          )}
           <div
             onClick={handleDeleteClick}
             className={`${styles.dropdownItem} text-[#F84A4A]`}

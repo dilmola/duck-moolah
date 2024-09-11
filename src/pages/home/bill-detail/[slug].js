@@ -43,8 +43,8 @@ export default function BillDetail() {
       const decrease = ((previousAmount - latestAmount) / previousAmount) * 100;
 
       return {
-        percentageIncrease: increase > 0 ? increase.toFixed(2) : 0,
-        percentageDecrease: decrease > 0 ? decrease.toFixed(2) : 0,
+        percentageIncrease: increase > 0 ? `${increase.toFixed(2)}%` : "0%",
+        percentageDecrease: decrease > 0 ? `${decrease.toFixed(2)}%` : "0%",
       };
     }
     return { percentageIncrease: 0, percentageDecrease: 0 };
@@ -63,8 +63,12 @@ export default function BillDetail() {
         </section>
         <section className="space-y-6 rounded-lg border border-white/10">
           <section className="p-6 space-y-4">
-            <h3 className="text-gray-500/50">name of bill</h3>
-            <a className="text-2xl">{firstBillName}</a>
+            <div className="flex flex-row justify-between">
+              <div>
+                <h3 className="text-gray-500/70">Name of bill</h3>
+                <a className="text-2xl">{firstBillName}</a>
+              </div>
+            </div>
             <div className="space-x-4 flex flex-row">
               <CardSummary
                 title="percentage Increase"

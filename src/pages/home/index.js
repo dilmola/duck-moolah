@@ -52,7 +52,7 @@ export default function Home() {
   }, [setAllData]);
 
   return (
-    <main className="min-h-screen bg-gradient pt-12">
+    <main className="min-h-screen bg-gradient pt-12 pb-40">
       <div className="container mx-auto flex flex-col space-y-20 px-28">
         <Header userName={userName} />
         <section className="mt-12 space-y-4">

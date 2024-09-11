@@ -1,14 +1,15 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import useLogin from "@/hooks/useLogin";
-import Logo from "../../public/logo/logo.png";
 import LogoBlack from "../../public/logo/black-logo.png";
 import LoginImg from "../../public/background/login-img.jpg";
 
 import GlobalContext from "@/context/globalContext";
+import InstructionModal from "@/components/modals/modal-instruction";
 
 export default function Login() {
   const [username, setUsername] = useState("");
+  const [showModal, setShowModal] = useState(true); 
   const router = useRouter();
   const { data: loginData, error: loginError } = useLogin(username);
   const { fetchData, fetchUsers, fetchDataPreviousBill } =
@@ -20,14 +21,24 @@ export default function Login() {
     setUsername(submittedUsername);
   };
 
+  const memoizedFetchData = useCallback(fetchData, []);
+  const memoizedFetchUsers = useCallback(fetchUsers, []);
+  const memoizedFetchDataPreviousBill = useCallback(fetchDataPreviousBill, []);
+
   useEffect(() => {
     if (loginData) {
       router.push("/home");
-      fetchData();
-      fetchUsers();
-      fetchDataPreviousBill();
+      memoizedFetchData();
+      memoizedFetchUsers();
+      memoizedFetchDataPreviousBill();
     }
-  }, [loginData, router, fetchData]);
+  }, [
+    loginData,
+    router,
+    memoizedFetchData,
+    memoizedFetchUsers,
+    memoizedFetchDataPreviousBill,
+  ]);
 
   return (
     <main className="grid grid-cols-5 min-h-screen ">
@@ -42,12 +53,6 @@ export default function Login() {
           alt="Logo"
           className="h-8 absolute top-10 left-10"
         />
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-          <a className="h-6 text-black text-2xl">
-            <span className="text-red-700 font-semibold">Attention!</span> ,
-            this software still beta and demo purpose only
-          </a>
-        </div>
       </div>
       <div className="flex flex-col min-h-screen col-span-2 p-4">
         <div className="flex-grow flex items-center justify-center">
@@ -91,6 +96,11 @@ export default function Login() {
           <p>design by aidil maula</p>
         </footer>
       </div>
+      <InstructionModal
+        showModal={showModal}
+        onClose={() => setShowModal(false)}
+        title="Important Information"
+      />
     </main>
   );
 }

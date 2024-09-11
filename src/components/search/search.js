@@ -5,7 +5,7 @@ import searchIcon from "../../../public/icons/icon-search.png";
 const Search = () => {
   const [query, setQuery] = useState("");
   const [showClear, setShowClear] = useState(false);
-  const { searchesData } = useContext(GlobalContext);
+  const { searchesData, fetchData } = useContext(GlobalContext);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -22,7 +22,7 @@ const Search = () => {
   const clearSearch = () => {
     setQuery("");
     setShowClear(false);
-    searchesData([]);
+    fetchData();
   };
 
   return (

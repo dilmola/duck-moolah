@@ -123,12 +123,6 @@ export function GlobalProvider({ children }) {
     setLoading(true);
     setError(null);
 
-    if (searchQuery) {
-      searchesData(searchQuery);
-      setLoading(false);
-      return;
-    }
-
     const getDataUrl = "/api/get-all-data-bills";
     try {
       const response = await fetch(getDataUrl);
@@ -302,6 +296,7 @@ export function GlobalProvider({ children }) {
       const result = await response.json();
       setData(result);
       setFilteredData(result);
+
       return result;
     } catch (error) {
       console.error("Error fetching data:", error);
