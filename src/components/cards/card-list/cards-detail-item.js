@@ -18,10 +18,10 @@ const CardDetailItem = ({
         className={`w-2 h-2 rounded-full ${dotStyle} ${styles.pulse} mr-2`}
       ></div>
       <section className="flex-1">{nameOfBill}</section>
-    
+
       <div className="md:flex-1 md:flex md:flex-row">
-        <div className="flex-1">{dueDateOfBill}</div>
-        <div className="flex-1">RM {amountOfBill}</div>
+        <div className="flex-1 pointer-events-none">{dueDateOfBill}</div>
+        <div className="flex-1 pointer-events-none">RM {amountOfBill}</div>
       </div>
       <footer className="relative flex-1">
         {statusOfBill !== "pending" && (
