@@ -20,7 +20,9 @@ const CardDetailItem = ({
       <section className="flex-1">{nameOfBill}</section>
 
       <div className="md:flex-1 md:flex md:flex-row">
-        <div className="flex-1 pointer-events-none">{dueDateOfBill}</div>
+        <div className="flex-1 pointer-events-none no-underline">
+          {dueDateOfBill}
+        </div>
         <div className="flex-1 pointer-events-none">RM {amountOfBill}</div>
       </div>
       <footer className="relative flex-1">
