@@ -10,7 +10,7 @@ import ModalAdd from "@/components/modals/modal-add/modal-add";
 import GlobalContext from "@/context/globalContext";
 import { useAmount } from "@/hooks/useAmount";
 import { useCurrentMonthYear } from "@/hooks/useCurrentMonthYear";
-import CardSummary from "@/components/cards/card-summary/card-summary"; // Import the Card component
+import CardSummary from "@/components/cards/card-summary/card-summary";
 import AmountImg from "../../../public/icons/icon-amount.png";
 import StatusPaidImg from "../../../public/icons/icon-statuspaid.png";
 
@@ -42,10 +42,6 @@ export default function Home() {
       );
       setPaidBillsCount(paidBills.length);
     }
-  }, [setAllData]);
-
-  useEffect(() => {
-    console.log("setAllData function:", setAllData);
   }, [setAllData]);
 
   return (

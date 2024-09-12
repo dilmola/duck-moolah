@@ -101,7 +101,7 @@ const ModalEdit = ({
             <h2 className="text-xl font-semibold">Edit Bill Detail</h2>
           </div>
           <button
-            className="cursor-pointer p-2 rounded-lg hover:rounded-3xl bg-black h-8 w-8"
+            className="cursor-pointer p-2 rounded-lg hover:rounded-3xl bg-black/20 h-8 w-8"
             style={{ transition: "border-radius 0.3s ease-in-out" }}
             onClick={onClose}
             aria-label="Close modal"

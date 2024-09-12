@@ -2,6 +2,7 @@ import { useState, useContext, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import useLogin from "@/hooks/useLogin";
 import LogoBlack from "../../public/logo/black-logo.png";
+import LogoMobileBlack from "../../public/logo/logo-mobile-black.png";
 import LoginImg from "../../public/background/login-img.jpg";
 
 import GlobalContext from "@/context/globalContext";
@@ -51,7 +52,12 @@ export default function Login() {
         <img
           src={LogoBlack.src}
           alt="Logo"
-          className="h-8 absolute top-10 left-10"
+          className="h-8 absolute top-10 left-10 md:block hidden"
+        />
+        <img
+          src={LogoMobileBlack.src}
+          alt="Logo Mobile Black"
+          className="h-8 absolute top-10 left-10 md:hidden block"
         />
       </div>
       <div className="flex flex-col md:min-h-screen h-max col-span-2 md:p-12 p-12">

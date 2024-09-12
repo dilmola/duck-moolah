@@ -123,7 +123,7 @@ const ModalAdd = () => {
       <div className="rounded-lg relative z-10 text-white max-w-screen-md bg-[#1b1b1b]/90 container md:backdrop-blur-sm backdrop-blur-xl">
         <header className="flex flex-row-reverse justify-between items-center border-b-2 border-b-white/20 p-6">
           <button
-            className="cursor-pointer p-2 rounded-lg hover:rounded-3xl bg-black h-8 w-8"
+            className="cursor-pointer p-2 rounded-lg hover:rounded-3xl bg-black/20 h-8 w-8"
             style={{ transition: "border-radius 0.3s ease-in-out" }}
             onClick={closeModal}
             aria-label="Close modal"
@@ -138,7 +138,7 @@ const ModalAdd = () => {
           {(activeTab === "ModalAddNewMonth" ||
             activeTab === "ModalAddPreviousMonth") && (
             <button
-              className="cursor-pointer p-2 rounded-lg hover:rounded-3xl bg-black h-8 w-8"
+              className="cursor-pointer p-2 rounded-lg hover:rounded-3xl bg-black/20 h-8 w-8"
               style={{ transition: "border-radius 0.3s ease-in-out" }}
               onClick={() => handleTabChange("ModalMenu")}
               aria-label="Back to main"

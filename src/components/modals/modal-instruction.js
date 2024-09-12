@@ -1,16 +1,26 @@
+import Image from "next/image";
+import CloseIcon from "../../../public/icons/icon-close.png";
+
 export default function ModalInstruction({ showModal, onClose, title }) {
   if (!showModal) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-[#1b1b1b]/90 rounded-lg shadow-lg p-6 max-w-lg w-full">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center mb-8">
           <h2 className="text-xl font-semibold">{title}</h2>
           <button
+            className="cursor-pointer p-2 rounded-lg hover:rounded-3xl bg-black/20 h-8 w-8"
+            style={{ transition: "border-radius 0.3s ease-in-out" }}
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600"
+            aria-label="Close modal"
           >
-            &times;
+            <Image
+              src={CloseIcon.src}
+              height={20}
+              width={20}
+              alt="Close icon"
+            />
           </button>
         </div>
         <div>
