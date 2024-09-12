@@ -52,7 +52,7 @@ export default function BillDetail() {
 
   return (
     <main className="min-h-screen bg-gradient pt-12">
-      <div className="container mx-auto flex flex-col md:space-y-20 space-y-12 md:px-28 px-4">
+      <div className="container mx-auto flex flex-col md:space-y-20 space-y-12 md:px-28 px-4 pb-12 mb:pb-0">
         <Header userName={userName} />
         <section className="space-y-4">
           <h2 className="md:text-5xl text-4xl font-semibold">

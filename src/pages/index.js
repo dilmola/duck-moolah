@@ -58,7 +58,7 @@ export default function Login() {
         <div className="flex-grow flex items-center justify-center">
           <form
             onSubmit={handleLogin}
-            className=" py-4 items-center justify-center flex flex-col space-y-12 min-w-96"
+            className="py-4 items-center justify-center flex flex-col space-y-12 min-w-80"
           >
             <div className="items-center justify-center flex flex-col">
               <h1 className="text-4xl font-semibold">welcome</h1>

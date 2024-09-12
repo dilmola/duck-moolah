@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -13,6 +14,20 @@ const ChartBar = ({ ChartUserData }) => {
   const paddingBottom = 10;
   const borderRadius = 10;
   const paddingTop = 10;
+
+  const [isMd, setIsMd] = useState(false);
+
+  // Check screen width and update the `isMd` state
+  const updateChartLayout = () => {
+    const screenWidth = window.innerWidth;
+    setIsMd(screenWidth >= 768); // md breakpoint (768px)
+  };
+
+  useEffect(() => {
+    updateChartLayout();
+    window.addEventListener("resize", updateChartLayout);
+    return () => window.removeEventListener("resize", updateChartLayout);
+  }, []);
 
   const RoundedBar = (props) => {
     const { x, y, width, height, fill } = props;
@@ -39,8 +54,9 @@ const ChartBar = ({ ChartUserData }) => {
   const formattedData = ChartUserData.map((data) => ({
     ...data,
     date_bill_created: formatDate(data.date_bill_created),
-    amount: data.bill_amount, // Change bill_amount to amount here
+    amount: data.bill_amount,
   }));
+
   return (
     <div
       style={{
@@ -48,28 +64,34 @@ const ChartBar = ({ ChartUserData }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        padding: "20px",
+        padding: isMd ? "20px" : "0px", // No padding under md breakpoint
         borderRadius: "8px",
         width: "100%",
       }}
     >
-      <div className="overflow-x-auto md:overflow-x-hidden">
-        <div className="min-w-[600px] md:min-w-full">
+      <div className={isMd ? "overflow-x-auto" : "overflow-x-hidden"}>
+        <div className={isMd ? "min-w-[600px]" : "min-w-full"}>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart
               data={formattedData}
-              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+              margin={{
+                top: isMd ? 20 : 0,
+                right: isMd ? 30 : 0,
+                left: isMd ? 20 : 0,
+                bottom: isMd ? 5 : 0,
+              }}
+              barCategoryGap={isMd ? 20 : 0} // Remove gap under md
             >
               <CartesianGrid
                 stroke="rgba(255, 255, 255, 0.06)"
                 strokeDasharray="3 3"
               />
               <XAxis dataKey="date_bill_created" />
-              <YAxis dataKey="amount" />
+              {isMd && <YAxis dataKey="amount" />}
               <Bar
                 dataKey="amount"
                 fill="#f7b267"
-                barSize={20}
+                barSize={isMd ? 20 : 16} // Smaller bars under md
                 shape={(props) => <RoundedBar {...props} />}
               />
               <Tooltip
