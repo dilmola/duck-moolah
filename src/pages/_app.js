@@ -13,6 +13,7 @@ export default function App({ Component, pageProps }) {
         <GlobalProvider>
           <Head>
             <title>Duck Moolah</title>
+            <meta name="format-detection" content="telephone=no" />
           </Head>
           <div className={Nunito_Sans_init.className}>
             <Component {...pageProps} />
