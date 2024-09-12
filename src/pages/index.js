@@ -54,16 +54,16 @@ export default function Login() {
           className="h-8 absolute top-10 left-10"
         />
       </div>
-      <div className="flex flex-col md:min-h-screen h-max col-span-2 p-4">
+      <div className="flex flex-col md:min-h-screen h-max col-span-2 md:p-4 p-12">
         <div className="flex-grow flex items-center justify-center">
           <form
             onSubmit={handleLogin}
             className=" py-4 items-center justify-center flex flex-col space-y-12"
           >
             <div className="items-center justify-center flex flex-col">
-              <h1 className="text-4xl font-semibold">Welcome</h1>
+              <h1 className="text-4xl font-semibold">welcome</h1>
               <h2 className="font-thin text-gray-300/80 text-center">
-                welcome to Expense Tracker - about duit akan habis!
+                to expense and bills tracker
               </h2>
             </div>
             <input
