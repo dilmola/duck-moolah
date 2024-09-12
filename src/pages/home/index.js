@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient pt-12 pb-40">
-      <div className="container mx-auto flex flex-col md:space-y-20 space-y-12 md:px-28 px-8">
+      <div className="container mx-auto flex flex-col md:space-y-20 space-y-12 md:px-28 px-4">
         <Header userName={userName} />
         <section className="mt-12 space-y-4">
           <h2 className="md:text-5xl text-4xl font-semibold">

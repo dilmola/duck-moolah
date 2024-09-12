@@ -87,7 +87,7 @@ const ModalEdit = ({
       aria-modal="true"
       role="dialog"
     >
-      <div className="rounded-lg relative z-10 text-white max-w-screen-md bg-[#1b1b1b]/90 container backdrop-blur-sm">
+      <div className="rounded-lg relative z-10 text-white max-w-screen-md bg-[#1b1b1b]/90 container md:backdrop-blur-sm backdrop-blur-xl">
         <header className="flex flex-row justify-between items-center mb-8 border-b-2 border-b-white/20 p-6">
           <div className="flex flex-row space-x-4 items-center">
             <div className="relative w-4 h-4">
