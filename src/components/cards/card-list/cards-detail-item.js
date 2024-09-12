@@ -18,25 +18,24 @@ const CardDetailItem = ({
         className={`w-2 h-2 rounded-full ${dotStyle} ${styles.pulse} mr-2`}
       ></div>
       <section className="flex-1">{nameOfBill}</section>
-
       <div className="md:flex-1 md:flex md:flex-row">
-        <div className="flex-1">
-          {dueDateOfBill}
-        </div>
+        <div className="flex-1">{dueDateOfBill}</div>
         <div className="flex-1">RM {amountOfBill}</div>
       </div>
       <footer className="relative flex-1">
         {statusOfBill !== "pending" && (
           <div className="absolute inset-0 flex items-center justify-center">
             <button
-              className={`px-4 rounded-lg ${
+              className={`${
                 statusOfBill === "paid"
-                  ? "bg-[#A7C957]/20 border border-[#A7C957] text-[#A7C957]"
+                  ? "bg-[#A7C957] md:bg-[#A7C957]/20 md:border md:border-[#A7C957] md:text-[#A7C957]"
                   : ""
-              }`}
+              } rounded-full w-3 h-3 md:w-auto md:h-auto md:px-4 md:rounded-lg`}
               disabled={statusOfBill === "paid"}
             >
-              {statusOfBill === "paid" ? "Paid" : statusOfBill}
+              <span className="hidden md:inline">
+                {statusOfBill === "paid" ? "Paid" : statusOfBill}
+              </span>
             </button>
           </div>
         )}

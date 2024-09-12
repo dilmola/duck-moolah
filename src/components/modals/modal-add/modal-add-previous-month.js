@@ -32,7 +32,7 @@ const ModalAddPreviousMonth = ({
       ? moment(dueDate, "YYYY-MM-DD").add(1, "month").format("DD/MM/YYYY")
       : null;
 
-      setPreviousBillFormValues((prevValues) => ({
+    setPreviousBillFormValues((prevValues) => ({
       ...prevValues,
       category,
       dueDate: dueDatePlusOneMonth,
@@ -75,7 +75,7 @@ const ModalAddPreviousMonth = ({
       className={`space-y-8 transition-opacity duration-300 ease-in transform opacity-100`}
     >
       <form
-        className="space-y-4"
+        className="md:space-y-4 space-y-8"
         onSubmit={(e) => {
           e.preventDefault();
           handlePreviousBillSubmit(handlePreviousBillFormSubmit);
@@ -150,7 +150,7 @@ const ModalAddPreviousMonth = ({
             </p>
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+        <div className="flex md:flex-row md:space-x-2 flex-col space-y-4 md:space-y-0">
           <div className="space-y-2 flex flex-col flex-1">
             <label htmlFor="due-date" className="text-white/60">
               Due Date

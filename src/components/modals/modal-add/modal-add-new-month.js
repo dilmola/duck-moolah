@@ -19,7 +19,7 @@ const ModalAddNewMonth = ({
       className={`space-y-8 transition-opacity duration-300 ease-in transform opacity-100`}
     >
       <form
-        className="space-y-4"
+        className="md:space-y-4 space-y-8"
         onSubmit={(e) => {
           e.preventDefault();
           handleNewBillSubmit(handleNewBillFormSubmit);
@@ -47,7 +47,7 @@ const ModalAddNewMonth = ({
         </div>
         <fieldset className="space-y-2">
           <legend className="text-white/60">Type of Bill</legend>
-          <div className="flex flex-row space-x-2">
+          <div className="flex md:flex-row md:space-x-2 flex-col space-y-4 md:space-y-0">
             <div className="flex-1">
               <button
                 type="button"
@@ -79,7 +79,7 @@ const ModalAddNewMonth = ({
             <p className="text-red-500 text-sm">{newBillFormErrors.billType}</p>
           )}
         </fieldset>
-        <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+        <div className="flex md:flex-row md:space-x-2 flex-col space-y-4 md:space-y-0">
           <div className="space-y-2 flex flex-col flex-1">
             <label htmlFor="due-date" className="text-white/60">
               Due Date

@@ -52,24 +52,26 @@ export default function BillDetail() {
 
   return (
     <main className="min-h-screen bg-gradient pt-12">
-      <div className="container mx-auto flex flex-col space-y-20 px-28">
+      <div className="container mx-auto flex flex-col md:space-y-20 space-y-12 md:px-28 px-8">
         <Header userName={userName} />
         <section className="space-y-4">
-          <h2 className="text-5xl font-semibold">Bill Details & Insights</h2>
-          <h3 className="text-2xl font-thin text-white/20">
+          <h2 className="md:text-5xl text-4xl font-semibold">
+            Bill Details & Insights
+          </h2>
+          <h3 className="md:text-2xl text-xl font-thin text-white/20">
             view detailed information about your bill or expense, and see trends
             with visual bar graphs showing changes over time.
           </h3>
         </section>
         <section className="space-y-6 rounded-lg border border-white/10">
-          <section className="p-6 space-y-4">
+          <section className="md:p-6 p-4 space-y-4">
             <div className="flex flex-row justify-between">
               <div>
                 <h3 className="text-gray-500/70">Name of bill</h3>
                 <a className="text-2xl">{firstBillName}</a>
               </div>
             </div>
-            <div className="space-x-4 flex flex-row">
+            <div className="flex md:flex-row flex-col md:space-x-4 space-y-2">
               <CardSummary
                 title="percentage Increase"
                 summary={percentageIncrease}

@@ -77,7 +77,7 @@ const CardsList = () => {
           </div>
 
           <div
-            className={`transition-opacity duration-300 ease-in ${
+            className={`transition-opacity duration-300 ease-in${
               typeOfView === "cardsDetailItem"
                 ? "opacity-100"
                 : "opacity-0 pointer-events-none"

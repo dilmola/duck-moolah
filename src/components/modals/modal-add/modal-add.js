@@ -111,7 +111,7 @@ const ModalAdd = () => {
 
   return (
     <div
-      className={`fixed inset-12 flex justify-center items-center z-50 transition-all duration-100 transform ${
+      className={`fixed inset-0 flex justify-center items-center z-50 transition-all duration-100 transform ${
         showModal
           ? "opacity-100 translate-y-0 pointer-events-auto"
           : "opacity-0 -translate-y-4 pointer-events-none"
