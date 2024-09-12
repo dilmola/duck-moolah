@@ -75,7 +75,7 @@ export default function Home() {
             <ButtonAdd openModal={openModal} />
           </div>
         </section>
-        <section className="flex md:flex-row flex-col md:space-x-4 space-y-2">
+        <section className="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-4">
           <CardSummary
             title="amount"
             summary={totalAmount}

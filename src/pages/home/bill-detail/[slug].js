@@ -71,7 +71,7 @@ export default function BillDetail() {
                 <a className="text-2xl">{firstBillName}</a>
               </div>
             </div>
-            <div className="flex md:flex-row flex-col md:space-x-4 space-y-2">
+            <div className="flex md:flex-row flex-col md:space-x-4 md:space-y-0 space-y-4">
               <CardSummary
                 title="percentage Increase"
                 summary={percentageIncrease}

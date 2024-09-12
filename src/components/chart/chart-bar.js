@@ -64,7 +64,7 @@ const ChartBar = ({ ChartUserData }) => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        padding: isMd ? "20px" : "0px", // No padding under md breakpoint
+        padding: isMd ? "20px" : "0px",
         borderRadius: "8px",
         width: "100%",
       }}
@@ -80,7 +80,7 @@ const ChartBar = ({ ChartUserData }) => {
                 left: isMd ? 20 : 0,
                 bottom: isMd ? 5 : 0,
               }}
-              barCategoryGap={isMd ? 20 : 0} // Remove gap under md
+              barCategoryGap={isMd ? 20 : 0} 
             >
               <CartesianGrid
                 stroke="rgba(255, 255, 255, 0.06)"
@@ -91,7 +91,7 @@ const ChartBar = ({ ChartUserData }) => {
               <Bar
                 dataKey="amount"
                 fill="#f7b267"
-                barSize={isMd ? 20 : 16} // Smaller bars under md
+                barSize={isMd ? 20 : 16}
                 shape={(props) => <RoundedBar {...props} />}
               />
               <Tooltip
