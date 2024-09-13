@@ -17,10 +17,9 @@ const ChartBar = ({ ChartUserData }) => {
 
   const [isMd, setIsMd] = useState(false);
 
-  // Check screen width and update the `isMd` state
   const updateChartLayout = () => {
     const screenWidth = window.innerWidth;
-    setIsMd(screenWidth >= 768); // md breakpoint (768px)
+    setIsMd(screenWidth >= 768);
   };
 
   useEffect(() => {
@@ -51,9 +50,11 @@ const ChartBar = ({ ChartUserData }) => {
     return formattedDate.replace("/", "/");
   };
 
-  const formattedData = ChartUserData.map((data) => ({
+  const formattedData = ChartUserData.sort(
+    (a, b) => new Date(a.due_date) - new Date(b.due_date)
+  ).map((data) => ({
     ...data,
-    date_bill_created: formatDate(data.date_bill_created),
+    due_date: formatDate(data.due_date),
     amount: data.bill_amount,
   }));
 
@@ -80,13 +81,13 @@ const ChartBar = ({ ChartUserData }) => {
                 left: isMd ? 20 : 0,
                 bottom: isMd ? 5 : 0,
               }}
-              barCategoryGap={isMd ? 20 : 0} 
+              barCategoryGap={isMd ? 20 : 0}
             >
               <CartesianGrid
                 stroke="rgba(255, 255, 255, 0.06)"
                 strokeDasharray="3 3"
               />
-              <XAxis dataKey="date_bill_created" />
+              <XAxis dataKey="due_date" />
               {isMd && <YAxis dataKey="amount" />}
               <Bar
                 dataKey="amount"

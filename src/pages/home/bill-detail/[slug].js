@@ -33,11 +33,18 @@ export default function BillDetail() {
     }
   }, [slug]);
 
+  useEffect(() => {
+    console.log("ChartUserData:", ChartUserData);
+  }, [ChartUserData]); 
+
   const { percentageIncrease, percentageDecrease } = useMemo(() => {
-    if (ChartUserData && ChartUserData.length > 1) {
-      const latestAmount = ChartUserData[ChartUserData.length - 1].bill_amount;
-      const previousAmount =
-        ChartUserData[ChartUserData.length - 2].bill_amount;
+    const sortedData = [...ChartUserData].sort(
+      (a, b) => new Date(a.due_date) - new Date(b.due_date)
+    );
+
+    if (sortedData.length > 1) {
+      const latestAmount = sortedData[sortedData.length - 1].bill_amount;
+      const previousAmount = sortedData[sortedData.length - 2].bill_amount;
 
       const increase = ((latestAmount - previousAmount) / previousAmount) * 100;
       const decrease = ((previousAmount - latestAmount) / previousAmount) * 100;
@@ -47,7 +54,7 @@ export default function BillDetail() {
         percentageDecrease: decrease > 0 ? `${decrease.toFixed(2)}%` : "0%",
       };
     }
-    return { percentageIncrease: 0, percentageDecrease: 0 };
+    return { percentageIncrease: "0%", percentageDecrease: "0%" };
   }, [ChartUserData]);
 
   return (
