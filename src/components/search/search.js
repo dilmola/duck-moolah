@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import GlobalContext from "@/context/globalContext";
 import searchIcon from "../../../public/icons/icon-search.png";
 
@@ -6,6 +6,18 @@ const Search = () => {
   const [query, setQuery] = useState("");
   const [showClear, setShowClear] = useState(false);
   const { searchesData, fetchData } = useContext(GlobalContext);
+  const [isMd, setIsMd] = useState(false);
+
+  const updateClearButton = () => {
+    const screenWidth = window.innerWidth;
+    setIsMd(screenWidth >= 768);
+  };
+
+  useEffect(() => {
+    updateClearButton();
+    window.addEventListener("resize", updateClearButton);
+    return () => window.removeEventListener("resize", updateClearButton);
+  }, []);
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -40,12 +52,23 @@ const Search = () => {
         placeholder="search here"
       />
       {showClear && (
-        <button
-          onClick={clearSearch}
-          className="absolute right-12 top-1/2 transform -translate-y-1/2 text-sm text-[#F7B267] border border-[#F7B267] bg-[#795937] hover:bg-[#a77d50] px-4 py-1 rounded-lg transition-colors duration-200"
-        >
-          Clear Filter
-        </button>
+        <>
+          {isMd ? (
+            <button
+              onClick={clearSearch}
+              className="absolute right-12 top-1/2 transform -translate-y-1/2 text-sm text-[#F7B267] border border-[#F7B267] bg-[#795937] hover:bg-[#a77d50] px-4 py-1 rounded-lg transition-colors duration-200"
+            >
+              Clear Search
+            </button>
+          ) : (
+            <button
+              onClick={clearSearch}
+              className="absolute right-12 top-1/2 transform -translate-y-1/2 text-2xl text-[#795937] bg-transparent border-none cursor-pointer font-semibold"
+            >
+              &#x2715;
+            </button>
+          )}
+        </>
       )}
       <img
         src={searchIcon.src}

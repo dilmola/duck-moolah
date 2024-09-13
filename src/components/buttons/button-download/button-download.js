@@ -47,7 +47,7 @@ const ButtonDownload = () => {
         disabled={loading}
       >
         {loading ? (
-          <span>Loading...</span> // Loading state
+          <span>Loading...</span>
         ) : (
           <>
             <Image
