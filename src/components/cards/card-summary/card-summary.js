@@ -7,7 +7,7 @@ export default function CardSummary({
 }) {
   return (
     <div className="rounded-lg p-6 border border-white/10 w-full">
-      <div className="flex justify-between mb-14">
+      <div className="flex justify-between md:mb-14 mb-8">
         <div className="text-white font-semibold md:text-4xl text-2xl">{summary}</div>
         <img src={imgsrc} alt={imgalt} className="h-8" />
       </div>

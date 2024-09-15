@@ -26,7 +26,7 @@ const ButtonDownload = () => {
         document.body.appendChild(a);
         a.click();
         a.remove();
-        window.URL.revokeObjectURL(url); // Clean up
+        window.URL.revokeObjectURL(url);
       } else {
         throw new Error(response.statusText);
       }
